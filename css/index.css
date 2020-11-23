@@ -1,0 +1,17 @@
+.css-ward:hover{
+ color: #22F52C;
+ cursor: pointer;
+}
+.css_vip{
+    font-size: 0.8em;
+    font-family: 'Kanit', sans-serif;
+    font-weight: lighter;
+    color: #37F0DA;
+}
+.div_search_hn {
+    width: 300px;
+    height: 100px;
+    padding: 15px;
+    background-color: red;
+    box-shadow: 10px 10px;
+}
