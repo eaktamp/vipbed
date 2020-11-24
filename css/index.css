@@ -15,3 +15,14 @@
     background-color: red;
     box-shadow: 10px 10px;
 }
+
+.vrz{
+    font-weight: bold;
+    font-size: 1.4em;
+    color: #22F52C;
+}
+.bt{
+    color: #EDAC16;
+    font-weight: bold;
+    font-size: 1.4em;
+}
