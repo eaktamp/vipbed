@@ -27,7 +27,7 @@ module.exports = {
         //console.log(value.id);
         return new Promise ((resolve,reject)=>{
             connection
-                .query(`select hn,pname,fname,lname from patient where hn::TEXT =?`,[value.id],(error,result)=>{
+                .query(`select hn,pname,fname,lname from patient where hn=$1::text`,[value.id],(error,result)=>{
                 if(error) return reject(error)
                // resolve(result.length > 0 ? result[0] : null)
                resolve(result)
