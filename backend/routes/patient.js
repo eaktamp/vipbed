@@ -5,9 +5,10 @@ router.get('/',async(req,res)=>{
     res.json(await service.find());
 });
 
-router.get('/:id',async (req,res)=>  {
-    //console.log(req.params.id);
-    const model = await service.findOne({ id:req.params.id })
+router.post('/getpatientinfomation',async (req,res)=>  {
+    //console.log(req.params.id); // get method ดึงค่าจาก url :id
+    //console.log(req.body); //  ดึงค่าจากฟอร์มและส่งแบบ post
+    const model = await service.findOne( req.body)
     res.json(model);
 });
 

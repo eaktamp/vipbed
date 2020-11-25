@@ -1,9 +1,10 @@
-const connection = require('../config/database');
+const pgconnection = require('../config/database');
+const myconnection = require('../config/mycon');
 
 module.exports = {
-    find() {
+    findWard() {
         return new Promise((resolve,reject)=>{
-            connection.query(`SELECT w.ward,w.name as wardname,COUNT(*) as total
+            pgconnection.query(`SELECT w.ward,w.name as wardname,COUNT(*) as total
             FROM bedno as b
             INNER JOIN roomno AS r ON b.roomno = r.roomno
             INNER JOIN ward AS w ON w.ward = r.ward
@@ -20,14 +21,43 @@ module.exports = {
         });
     },
 
-    findOne(id) {
+    findBed() {
         return new Promise((resolve,reject)=>{
-            connection.query(`SELECT hn,pname,fname,lname FROM patient where hn =`+id,(error,result)=>{
+            pgconnection.query(`SELECT b.*,n.icode,n.name AS ward_vip
+            FROM bedno as b
+            INNER JOIN roomno AS r ON b.roomno = r.roomno
+            INNER JOIN ward AS w ON w.ward = r.ward
+            INNER JOIN roomtype AS t ON t.roomtype = r.roomtype
+            LEFT JOIN room_status_type AS s ON s.room_status_type_id = r.room_status_type_id
+            LEFT JOIN nondrugitems AS n ON n.icode = b.room_charge_icode
+            WHERE 1 = 1 
+            --AND w.ward = '$ward'
+            AND t.roomtype = '2' 
+            AND b.bedtype = '2'
+            ORDER BY bedno ASC `,(error,result)=>{
                 if(error) return reject(error)
-                const value = result.rows[0];
-                resolve(value)
+                resolve(result.rows)
             });
         });
+
+    },
+
+
+    onCreate(value) {
+        return new Promise((resolve, reject) => {
+            //resolve(value);
+            const bkmodel = {
+                user_name: value.username,
+                user_id: value.user_id,
+                sql_aws: value.sql_aws,
+                start_time: new Date(value.start_time),
+            }
+            //resolve (bkmodel);
+            myconnection.query('INSERT INTO test_sql SET ?', bkmodel, (err, result) => {
+                if (err) return reject(err);
+                resolve(result);
+            })
+        })
     }
 
 }
