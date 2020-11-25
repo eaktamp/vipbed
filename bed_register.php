@@ -2,12 +2,12 @@
 session_start();
 include "function/autoload.php";
 date_default_timezone_set("Asia/Bangkok");
-$url = "http://" . $_SERVER['SERVER_NAME'] . ":3000/api/room/bed";
+$url = "http://" . $_SERVER['SERVER_NAME'] . ":3000/api/bed";
 
 $contents = file_get_contents($url);
 $results = json_decode($contents);
 foreach ($results as $k => $v) {
-    $total += $v->total;
+  //  $total += $v->total;
 }
 
 include "config/mysql_con.class.php";
