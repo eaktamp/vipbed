@@ -23,7 +23,7 @@ module.exports = {
 
     findBed() {
         return new Promise((resolve,reject)=>{
-            pgconnection.query(`SELECT b.*,n.icode,n.name AS ward_vip
+            pgconnection.query(`SELECT b.*,n.icode,n.name AS ward_vip,w.ward,w.name as nameward
             FROM bedno as b
             INNER JOIN roomno AS r ON b.roomno = r.roomno
             INNER JOIN ward AS w ON w.ward = r.ward
@@ -31,7 +31,6 @@ module.exports = {
             LEFT JOIN room_status_type AS s ON s.room_status_type_id = r.room_status_type_id
             LEFT JOIN nondrugitems AS n ON n.icode = b.room_charge_icode
             WHERE 1 = 1 
-            --AND w.ward = '$ward'
             AND t.roomtype = '2' 
             AND b.bedtype = '2'
             ORDER BY bedno ASC `,(error,result)=>{
