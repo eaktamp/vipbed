@@ -8,8 +8,10 @@ router.get('/', async (req, res) => {
     res.json(await service.findWard());
 });
 
-router.get('/bed', async (req, res) => {
-    res.json(await service.findBed());
+router.get('/wardbed:wardid', async (req, res) => {
+    //res.json(req.params.wardid);
+    //res.json(await service.findBed());
+    res.json(await service.findbedOneward(req.params.wardid));
 });
 
 
