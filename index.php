@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "function/autoload.php";
 date_default_timezone_set("Asia/Bangkok");
 $url = "http://172.16.28.169:3000/api/room";
 $contents = file_get_contents($url);
@@ -54,8 +55,8 @@ foreach ($results as $k => $v) {
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
                                         <div class="header-top-menu tabl-d-n hd-search-rp">
                                             <div class="breadcome-heading">
-                                                <form role="search" class="">
-                                                    <!-- <input type="text" placeholder="Search..." class="form-control"> -->
+                                                <form role="search" class="headname"><i class="fa fa-heartbeat"></i>&nbsp;&nbsp;<?php echo $hname; ?>
+                                                    <!-- <input type="text" placeholder="<?php echo $hname; ?>" class="form-control"> -->
                                                     <!-- <a href=""><i class="fa fa-search"></i></a> -->
                                                 </form>
                                             </div>
@@ -115,21 +116,27 @@ foreach ($results as $k => $v) {
                 <div class="col-md-12">
                     <div class="row">
                         <?php
+                        $badin = "50";
                         foreach ($results as $key => $value) {
                         ?>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 css-ward " style="margin-bottom: 10px;">
-                                <div class="admin-content analysis-progrebar-ctn res-mg-t-15">
-                                    <h4 class="text-left text-uppercase css-ward"><b><?php echo $value->wardname; ?></b></h4>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;">
+                                <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
+                                    <h4 class="text-left text-uppercase "><b><?php echo $value->wardname; ?></b></h4>
                                     <div class="row vertical-center-box vertical-center-box-tablet">
                                         <div class="col-xs-3 mar-bot-15 text-left">
-                                            <label class="label bg-green"><?php echo $value->total / 100; ?> %<i class="fa fa-level-up" aria-hidden="true"></i></label>
+                                            <label class="label bg-green" title="จำนวนเตียง และชื่อเตียง">
+                                                <?php echo $value->total; ?>
+                                        </label>
                                         </div>
                                         <div class="col-xs-9 cus-gh-hd-pro">
-                                            <h2 class="text-right no-margin"><?php echo $value->total; ?></h2>
+                                            <h2 class="text-right no-margin total" title="จำนวนเตียงว่าง"><?php echo $value->total; ?>
+                                             <i class="fa fa-bed" aria-hidden="true"></i>
+                                             </h2>
                                         </div>
                                     </div>
                                     <div class="progress progress-mini">
-                                        <div style="width: <?php echo $value->total + 50; ?>%;" title="ทดสอบ progress" class="progress-bar bg-red"></div>
+                                        <!-- <div style="width: <?php// echo ($value->total*100)/$bedin;?>%" title="อัตราการใช้เตียง <?php// echo ($value->total*100)/$bedin;?> %;" class="progress-bar bg-red"></div> -->
+                                        <div style="width: <?php echo $value->total*100/$badin;?>%" class="progress-bar bg-red"></div>
                                     </div>
                                 </div>
                             </div>
@@ -140,10 +147,11 @@ foreach ($results as $k => $v) {
                 </div>
             </div>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <?php include "function/footer.php"; ?>
     </div>
     <?php include "function/js.php"; ?>
 </body>
 
 </html>
+
