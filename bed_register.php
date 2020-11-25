@@ -2,7 +2,7 @@
 session_start();
 include "function/autoload.php";
 date_default_timezone_set("Asia/Bangkok");
-$url = "http://" . $_SERVER['SERVER_NAME'] . ":3000/api/room";
+$url = "http://" . $_SERVER['SERVER_NAME'] . ":3000/api/room/bed";
 
 $contents = file_get_contents($url);
 $results = json_decode($contents);

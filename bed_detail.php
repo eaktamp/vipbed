@@ -82,7 +82,7 @@ $query = pg_query($conn, $sql);
     <link rel="stylesheet" href="css/calendar/fullcalendar.print.min.css">
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- responsive CSS
         ============================================ -->
         <link rel="stylesheet" href="css/index.css">

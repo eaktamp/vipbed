@@ -1,4 +1,7 @@
 
+.c-p{
+    cursor: pointer;
+}
 .css-ward:hover{
  color: #22F52C;
  cursor: pointer;
@@ -33,3 +36,126 @@
     font-family: 'Kanit', sans-serif;
     font-weight: lighter;
 }
+
+.beddetf{
+color: #EF4312;
+font-family: 'Kanit', sans-serif;
+background: #000;
+font-size: 1.4em;
+cursor: pointer;
+border-radius: 8px;
+padding: 10px;
+margin: 1px;
+font-weight: bold;
+}
+
+.bedfull{
+color: #1FFB31;
+font-family: 'Kanit', sans-serif;
+background: #000;
+font-size: 1.4em;
+cursor: pointer;
+border-radius: 8px;
+padding: 10px;
+font-weight: bold;
+margin: 1px;
+}
+
+[beddetf-md-tooltip] {
+    z-index: 9;
+    position: relative;
+   }
+   [beddetf-md-tooltip]:before {
+      content: attr(beddetf-md-tooltip);
+      position: absolute;
+      bottom: -35px;
+      left: 100%;
+      padding: 8px;
+      transform: translateX(-50%) scale(0);
+      transition: transform 0.3s ease-in-out;
+      transform-origin: top;
+      background: #06456B;
+      color: white;
+      border-radius: 2px;
+      font-size: 1.2em;
+      font-family: Roboto,sans-serif;
+      font-weight: 400;
+   }
+   [beddetf-md-tooltip]:hover:before {
+    transform: translateX(-50%) scale(1);
+   }
+
+[bedfull-md-tooltip] {
+    z-index: 9;
+    position: relative;
+   }
+   [bedfull-md-tooltip]:before {
+      content: attr(bedfull-md-tooltip);
+      position: absolute;
+      bottom: -35px;
+      left: 100%;
+      padding: 8px;
+      transform: translateX(-50%) scale(0);
+      transition: transform 0.3s ease-in-out;
+      transform-origin: top;
+      background: #BD1A1A;
+      color: white;
+      border-radius: 2px;
+      font-size: 1.2em;
+      font-family: Roboto,sans-serif;
+      font-weight: 400;
+   }
+   [bedfull-md-tooltip]:hover:before {
+    transform: translateX(-50%) scale(1);
+   }
+
+
+   [md-tooltip] {
+    z-index: 9;
+    position: relative;
+   }
+   [md-tooltip]:before {
+      content: attr(md-tooltip);
+      position: absolute;
+      bottom: -70px;
+      left: 100%;
+      padding: 8px;
+      transform: translateX(-50%) scale(0);
+      transition: transform 0.3s ease-in-out;
+      transform-origin: top;
+      background: #DD3D10;
+      color: white;
+      border-radius: 2px;
+      font-size: 18px;
+      font-family: Roboto,sans-serif;
+      font-weight: 400;
+      
+   }
+   [md-tooltip]:hover:before {
+    transform: translateX(-50%) scale(1);
+   }
+
+   [bedtotal-tooltip] {
+    z-index: 9;
+    position: relative;
+   }
+   [bedtotal-tooltip]:before {
+      content: attr(bedtotal-tooltip);
+      position: absolute;
+      bottom: -35;
+      left: 78%;
+      padding: 8px;
+      transform: translateX(-50%) scale(0);
+      transition: transform 0.3s ease-in-out;
+      transform-origin: top;
+      background: #D3D60E;
+      color: #000;
+      border-radius: 2px;
+      font-size: 14px;
+      font-family: Roboto,sans-serif;
+      font-weight: 400;
+      
+   }
+   [bedtotal-tooltip]:hover:before {
+    transform: translateX(-50%) scale(1);
+   }
