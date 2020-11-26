@@ -33,6 +33,9 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 10px;
   font-weight:700;
 }
+body{
+    overflow:hidden;
+}
 a {transition: all 0.3s ease 0s;text-decoration:none;}
 a:hover{
   color: #ec4445;
@@ -287,6 +290,7 @@ ul.dtl-social li a{
 	border:none;
 }
 .footer-copyright-area {
+    /* position: fixed; */
     background: #102692;
     padding: 20px 0px;
     text-align: center;

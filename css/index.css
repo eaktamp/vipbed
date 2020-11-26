@@ -159,3 +159,231 @@ margin: 1px;
    [bedtotal-tooltip]:hover:before {
     transform: translateX(-50%) scale(1);
    }
+
+   .css-room{
+       font-size: 0.8em;
+       color: #000;
+   }
+
+
+   [index-tooltip] {
+    z-index: 9;
+    position: relative;
+    font-family: 'Kanit', sans-serif;
+   }
+   [index-tooltip]:before {
+    font-family: 'Kanit', sans-serif;
+      content: attr(index-tooltip);
+      position: absolute;
+      bottom: -35;
+      left: 50%;
+      top: 80%;
+      padding: 8px;
+      transform: translateX(-50%) scale(0);
+      transition: transform 0.3s ease-in-out;
+      transform-origin: top;
+      background: #D3D60E;
+      color: #000;
+      border-radius: 2px;
+      font-size: 14px;
+      font-family: Roboto,sans-serif;
+      font-weight: 400;
+      
+   }
+   [index-tooltip]:hover:before {
+    font-family: 'Kanit', sans-serif;
+    transform: translateX(-50%) scale(1);
+   }
+
+
+   [order-tooltip] {
+    z-index: 9;
+    position: relative;
+    font-family: 'Kanit', sans-serif;
+   }
+   [order-tooltip]:before {
+    font-family: 'Kanit', sans-serif;
+      content: attr(order-tooltip);
+      position: absolute;
+      bottom: -35;
+      left: 50%;
+      top: 80%;
+      padding: 8px;
+      transform: translateX(-50%) scale(0);
+      transition: transform 0.3s ease-in-out;
+      transform-origin: top;
+      background: #94FCD9;
+      color: #000;
+      border-radius: 2px;
+      font-size: 14px;
+      font-family: Roboto,sans-serif;
+      font-weight: 400;
+      
+   }
+   [order-tooltip]:hover:before {
+    font-family: 'Kanit', sans-serif;
+    transform: translateX(-50%) scale(1);
+   }
+   [addbed-tooltip] {
+    z-index: 0;
+    position: relative;
+    font-family: 'Kanit', sans-serif;
+   }
+   [addbed-tooltip]:before {
+    font-family: 'Kanit', sans-serif;
+      content: attr(addbed-tooltip);
+      position: absolute;
+      bottom: -35;
+      left: -80%;
+      top: 10%;
+      padding: 8px;
+      transform: translateX(-50%) scale(0);
+      transition: transform 0.3s ease-in-out;
+      transform-origin: top;
+      background: #94FCD9;
+      color: #000;
+      border-radius: 2px;
+      font-size: 14px;
+      font-family: Roboto,sans-serif;
+      font-weight: 400;
+      
+   }
+   [addbed-tooltip]:hover:before {
+    font-family: 'Kanit', sans-serif;
+    transform: translateX(-50%) scale(1);
+   }
+   .btn-cloce{
+    background-color: #839C99;
+    border: none;
+    color: white;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+   }
+   .btn-cloce:hover{
+    background-color: #2A372F;
+    border: none;
+    color: #FFF;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+   }
+
+
+   .btn-add{
+    background-color: #0A7B6A;
+    border: none;
+    color: white;
+    /* padding: 10px 22px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+   }
+   .btn-add:hover{
+    background-color: #023956;
+    border: none;
+    color: #FFF;
+    /* padding: 10px 22px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+   }
+
+   .head-detail-patient{
+    font-family: 'Kanit', sans-serif;
+    font-weight: 1.4em;
+    font-weight: bold;
+   }
+   .head-show-modal-bed{
+    font-family: 'Kanit', sans-serif;
+    color: #EB4C0B;
+    font-size: 1.4em;
+    font-weight: bold;
+   }
+   .css-room-modal-show{
+    font-family: 'Kanit', sans-serif;
+    color: #0C56B4;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+   
+
+
+.btn-patient-add{
+    background-color: #87FEBD;
+    font-family: 'Kanit', sans-serif;
+    font-weight: bold;
+    border: none;
+    color: #000;
+    /* padding: 10px 22px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+   }
+   .btn-patient-add:hover{
+    background-color: #F43B0A;
+    font-family: 'Kanit', sans-serif;
+    font-weight: bold;
+    border: none;
+    color: #FFF;
+    /* padding: 10px 22px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+   }
+
+   .btn-submit{
+    background-color: #2701A7;
+    font-family: 'Kanit', sans-serif;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+    /* padding: 10px 22px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+   }
+   .btn-submit:hover{
+    background-color: #BF6E08;
+    font-family: 'Kanit', sans-serif;
+    font-weight: bold;
+    border: none;
+    color: #FFF;
+    /* padding: 10px 22px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+   }
+
+
+
+
+
+   /* add patient */
+  

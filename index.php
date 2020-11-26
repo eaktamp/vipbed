@@ -3,7 +3,7 @@ session_start();
 include "function/autoload.php";
 date_default_timezone_set("Asia/Bangkok");
 $url = "http://" . $_SERVER['SERVER_NAME'] . ":3000/api/room";
-
+//$url = "http://172.16.28.169:3000/api/room";
 $contents = file_get_contents($url);
 $results = json_decode($contents);
 foreach ($results as $k => $v) {
@@ -27,7 +27,7 @@ $res=mysqli_query($con,$sql);
             </div>
             <div class="nalika-profile">
                 <div class="profile-dtl">
-                    <a href="#"><img src="img/notification/4.jpg" alt="" /></a>
+                    <a href="#"><img src="<?php echo $logo;?>" alt="" /></a>
                     <h2>Test <span class="min-dtn">Vip Room</span></h2>
                 </div>
             </div>
@@ -132,7 +132,7 @@ $res=mysqli_query($con,$sql);
                                 $regis_total   = $item['regis_total']; 
                                 if($ward == $value->ward){
                         ?>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" onclick="window.location.href = 'bed_register.php?ward=<?php echo $value->ward; ?>'">
                                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
                                     <h4 class="text-left text-uppercase "><b><?php echo $value->wardname; ?></b></h4>
                                     <div class="row vertical-center-box vertical-center-box-tablet">
