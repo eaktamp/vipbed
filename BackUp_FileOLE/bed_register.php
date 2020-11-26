@@ -24,7 +24,6 @@ $res=mysqli_query($con,$sql);
 
 
 <body>
-<button onclick="topFunction()" id="myBtn" title="กลับบนสุด">Top</button>
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
@@ -172,7 +171,6 @@ $res=mysqli_query($con,$sql);
                                             <h2 class="text-right no-margin total c-p"><?php //echo $regis_total;?>
                                                 <i class="fa fa-male" aria-hidden="true"></i>
                                                 <i class="fa fa-female" aria-hidden="true"></i>
-                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                 
                                             </h2>
                                         </div>

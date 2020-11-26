@@ -1,6 +1,6 @@
 <!-- Modal รายการที่ถูกจอง -->
 <div class="modal fade" id="<?php echo  $value->bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
 
         <div class="modal-content">
@@ -38,8 +38,6 @@
                         </tr>
                     </tbody>
                 </table>
-
-                </table>
             </div>
             <br>
             <div class="modal-footer">
@@ -67,7 +65,6 @@
                 <!-- http://172.16.28.169:3000/api/patient/patientinfomation -->
 
 
-
                 <div class="row">
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="search" placeholder="ระบุ HN...ที่ต้องการค้นหา ไม่ต้องเติม 0 ข้างหน้า" required />
@@ -83,7 +80,7 @@
                 </div>
                 <hr>
                 <div class="search-detail-p" id="result"></div>
-                <br>
+                <hr>
             </div>
 
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
@@ -166,3 +163,4 @@
             </div>
         </div>
     </div>
+</div>

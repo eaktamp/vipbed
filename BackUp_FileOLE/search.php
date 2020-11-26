@@ -18,23 +18,17 @@ if (pg_num_rows($result) > 0) {
     while ($row = pg_fetch_array($result)) {
         // echo $row['hn'];
 ?>
-        <!-- <table class="table table-hover">
+        <table class="table table-hover">
                 <tr class="search-detail-p">
-                    <td class="text-center"><?php// echo $row['hn']; ?></td>
-                    <td class="text-left"><?php //echo $row['pname'] . "" . $row['fname'] . " " . $row['lname']; ?></td>
-                    <td class="text-center"><?php// echo $row['pname'] . "" . $row['fname'] . " " . $row['lname']; ?></td>
-                    <td class="text-center"><?php //echo $row['gender_text']; ?></td>
-                    <td class="text-center"><?php// echo $row['ppname']; ?></td>
+                    <td class="text-center"><?php echo $row['hn']; ?></td>
+                    <td class="text-left"><?php echo $row['pname'] . "" . $row['fname'] . " " . $row['lname']; ?></td>
+                    <td class="text-center"><?php echo $row['personal_id']; ?></td>
+                    <td class="text-center"><?php echo $row['gender_text']; ?></td>
+                    <td class="text-center"><?php echo $row['ppname']; ?></td>
                 </tr>
-        </table> -->
+        </table>
 
-        <button type="submit" class="btn btn-block btn-select" value="submit" name="submit"  bedfull-md-tooltip="คลิกเพื่อจอง">
-        <?php echo $row['hn']; ?>
-        <?php echo " ".$row['pname'] . "" . $row['fname'] . " " . $row['lname']; ?>
-        <?php echo " ".$row['pname'] . "" . $row['fname'] . " " . $row['lname']; ?>
-        <?php echo  " ".$row['gender_text']; ?>
-        <?php echo  " ".$row['ppname']; ?>
-        </button>
+        <!-- <button type="submit" class="btn btn-secondary btn-block btn-submit" value="submit" name="submit">ค้นหาข้อมูลในระบบ</button> -->
 <?php 
 }
 } else {

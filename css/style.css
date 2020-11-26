@@ -34,7 +34,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight:700;
 }
 body{
-    overflow:hidden;
+    /* overflow:hidden; */
+    
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 a {transition: all 0.3s ease 0s;text-decoration:none;}
 a:hover{
