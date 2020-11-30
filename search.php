@@ -73,8 +73,9 @@ if (pg_num_rows($result) > 0) {
 			//     alert("Test");
 			// }
 
-			$(document).ready(function() {
-				$("#submit").click(function() {
+			 $(document).ready(function() {
+			 	$("#submit").click(function(e) {
+					e.preventDefault();		
 					$.ajax({
 						type: "POST",
 						url: "addpatient.php",
@@ -82,10 +83,12 @@ if (pg_num_rows($result) > 0) {
 						success: function(result) {
 							//console.log(result);
 							if (result.status == 1) {
-
-								alert(result.message);
-								//	swal("จองสำเร็จ!", "รอยืนยันการเข้าห้องพิเศษ!", "success");
-								//	window.location.href='main_ward.php';
+								//alert(result.message);
+								swal("สำเร็จ!", result.message, "success")
+								.then((value) => {
+									location.reload();
+								});
+																	
 							} else {
 								//swal("ไม่สำเร็จ!", "มีข้อมูลผิดพลาดในระบบ!", "warning");
 								alert(result.message);
@@ -93,6 +96,7 @@ if (pg_num_rows($result) > 0) {
 							}
 						}
 					});
-				});
-			});
+			 	});
+			
+			 });
 		</script>
