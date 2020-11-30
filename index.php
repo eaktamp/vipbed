@@ -136,7 +136,7 @@ $res=mysqli_query($con,$sql);
                                 $regis_inbed   = $item['regis_inbed']; 
                                 if($ward == $value->ward){
                         ?>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" onclick="window.location.href = 'bed_register.php?ward=<?php echo $value->ward; ?>'">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" onclick="window.location.href = 'bed_register.php?ward=<?php echo $value->ward; ?>'">
                                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
                                     <h4 class="text-left text-uppercase "><b><?php echo $value->wardname; ?></b></h4>
                                     <div class="row vertical-center-box vertical-center-box-tablet">
@@ -154,7 +154,7 @@ $res=mysqli_query($con,$sql);
                                             </label>
                                         </div>
                                         <div class="col-xs-9 cus-gh-hd-pro">
-                                            <h2 class="text-right no-margin total c-p" md-tooltip="จำนวนจอง"><?php echo $regis_total; ?>
+                                            <h2 class="text-right no-margin total c-p" md-tooltip="จำนวนจอง"><span class="bedq"><?php echo $regis_total; ?></span>
                                                 <i class="fa fa-bed" aria-hidden="true"></i>
                                             </h2>
                                         </div>

@@ -61,6 +61,17 @@ font-weight: bold;
 margin: 1px;
 }
 
+.bedq{
+    color: #F7F0EE;
+}
+.bedq:hover{
+    color: #11D653;
+}
+
+.hover-main:hover{
+    cursor: pointer;
+}
+
 .bednull{
     color: #CBD613;
     font-family: 'Kanit', sans-serif;

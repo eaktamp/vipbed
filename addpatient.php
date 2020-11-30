@@ -26,6 +26,8 @@ $query = mysqli_query($con,$sql);
 
 if($query) {
 	echo json_encode(array('status' => '1','message'=> 'บันทึกรายการสำเร็จ'));
+	
+	
 }
 else
 {
