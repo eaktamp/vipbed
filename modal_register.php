@@ -134,6 +134,7 @@
 <!-- ################ -->
 <!-- Modal show ที่จองแต่ละที่ รวม -->
 <div class="modal fade" id="bed<?php echo  $value->bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
     <div class="modal-dialog">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
 
