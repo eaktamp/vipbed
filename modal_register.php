@@ -13,7 +13,7 @@
                     <!-- http://172.16.28.169:3000/api/patient/patientinfomation -->
                     <div class="row">
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="hn" id="hn" onkeypress="return isNumberKey(event)" placeholder="ระบุ HN...ที่ต้องการค้นหา ไม่ต้องเติม 0 ข้างหน้า" required />
+                            <input type="text" class="form-control" onkeydown="return event.key != 'Enter';" name="hn" id="hn" onkeypress="return isNumberKey(event)" placeholder="ระบุ HN...ที่ต้องการค้นหา ไม่ต้องเติม 0 ข้างหน้า" required />
                             <!-- <input type="hidden" class="form-control" name="ward" id="ward" value="<?php //echo $ward; 
                                                                                                         ?>" /> -->
                         </div>
