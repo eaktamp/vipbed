@@ -33,12 +33,26 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 10px;
   font-weight:700;
 }
+html {
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%));
+  }
+
+
 body{
     /* overflow:hidden; */
-    
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    /* padding-left: calc(100vw - 100%); */
+    /* -ms-overflow-style: none;  
+    scrollbar-width: none;  */
 }
+/* html {
+    overflow-y: scroll;
+  }
+body.modal-open {
+    padding-right: 0px !important;
+    overflow-y: auto;
+    } */
+
 a {transition: all 0.3s ease 0s;text-decoration:none;}
 a:hover{
   color: #ec4445;

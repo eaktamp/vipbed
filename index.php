@@ -12,7 +12,10 @@ foreach ($results as $k => $v) {
 
 include "config/mysql_con.class.php";
 
-$sql = " SELECT ward,regis_total FROM vipbed_ward ";
+$sql = " SELECT ward as ward
+        ,(SELECT COUNT(*) FROM vipbed_register AS b WHERE b.status_regis = 'Y' AND a.ward = b.ward  ) AS regis_total
+        ,(SELECT COUNT(*) FROM vipbed_register AS b WHERE b.status_regis = 'S' AND a.ward = b.ward  ) AS regis_inbed
+        FROM vipbed_ward As a ";
 $res=mysqli_query($con,$sql);
 ?>
 
@@ -130,6 +133,7 @@ $res=mysqli_query($con,$sql);
                             foreach($res as $item) {
                                 $ward = $item['ward'];
                                 $regis_total   = $item['regis_total']; 
+                                $regis_inbed   = $item['regis_inbed']; 
                                 if($ward == $value->ward){
                         ?>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" onclick="window.location.href = 'bed_register.php?ward=<?php echo $value->ward; ?>'">
@@ -142,18 +146,22 @@ $res=mysqli_query($con,$sql);
                                                 <?php echo $value->total; ?>
                                                 </span> 
                                                 <span class="bedfull" bedfull-md-tooltip="จำนวนเตียงที่ใช้งานอยู่">
-                                                    <?php echo $value->total; ?>
+                                                    <?php echo $regis_inbed; ?>
+                                                </span>
+                                                <span class="bednull" null-md-tooltip="จำนวนเตียง ว่าง">
+                                                    <?php echo $value->total- $regis_inbed; ?>
                                                 </span>
                                             </label>
                                         </div>
                                         <div class="col-xs-9 cus-gh-hd-pro">
-                                            <h2 class="text-right no-margin total c-p" md-tooltip="จำนวนเตียงว่าง"><?php echo $regis_total; ?>
+                                            <h2 class="text-right no-margin total c-p" md-tooltip="จำนวนจอง"><?php echo $regis_total; ?>
                                                 <i class="fa fa-bed" aria-hidden="true"></i>
                                             </h2>
                                         </div>
                                     </div>
                                     <div class="progress progress-mini">
-                                        <div   style="width: <?php echo $value->total * 100 / $badin; ?>%" class="progress-bar bg-red"></div>
+                                        <div   style="width: <?php echo $regis_inbed * 100 / $value->total; ?>%" class="progress-bar bg-red"></div>
+                                        <!-- <div   style="width: <?php //echo 13 * 0 /100; ?>%" class="progress-bar bg-red"></div> -->
                                     </div>
                                 </div>
                             </div>
