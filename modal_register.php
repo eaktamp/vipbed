@@ -133,7 +133,7 @@
 
 <!-- ################ -->
 <!-- Modal show ที่จองแต่ละที่ รวม -->
-<div class="modal fade" id="bed<?php echo  $ward; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="bed<?php echo  $value->bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
 
@@ -145,7 +145,7 @@
         </button> -->
             </div>
             <div class="modal-body">
-
+            <?php  echo $bbb =  $value->bedno;?>
                 <table class="table table-hover">
                     <thead>
                         <tr class="head-detail-patient">
@@ -160,9 +160,13 @@
                     </thead>
                     <tbody>
                         <?php
+                        $sql2 = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y'  ";
+                        $resadd2 = mysqli_query($con,$sql2);
                         $rw = 0;
-                        while ($rowadd  = mysqli_fetch_array($resadd)) {
+                       
+                        while ($rowadd  = mysqli_fetch_array($resadd2)) {
                             $rw++;
+                           
                         ?>
                             <tr>
                                 <td class="text-center"><?php echo $rw; ?></td>
@@ -171,7 +175,7 @@
                                 <td class="text-center"> <?php echo $rowadd['age']; ?></td>
                                 <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
                                 <td class="text-center"> <?php echo $rowadd['dateupdate_register']; ?></td>
-                                <td class="text-center"><button type="button" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                                <td class="text-center"><button type="button" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' '.$bbb;?></button></td>
 
 
                             </tr>

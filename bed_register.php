@@ -162,7 +162,7 @@ while($row     = mysqli_fetch_array($res)){
                             //     if($ward == $value->ward){
                         ?>
                             <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#<?php //echo  $value->bedno; ?>"> -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $ward; ?>">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $value->bedno;  ?>">
 
                                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
                                     <h4 class="text-left text-uppercase "><b><?php echo  $value->bedno . " <span class='css-room'>(" . $value->roomname . ")</span>"; ?></b></h4>
