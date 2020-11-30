@@ -132,8 +132,8 @@
 
 
 <!-- ################ -->
-<!-- Modal show ที่จองแต่ละที่ รวม -->
-<div class="modal fade" id="bed<?php echo  $ward; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+<div class="modal fade" id="bed<?php echo $ward; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
 
@@ -171,7 +171,9 @@
                                 <td class="text-center"> <?php echo $rowadd['age']; ?></td>
                                 <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
                                 <td class="text-center"> <?php echo $rowadd['dateupdate_register']; ?></td>
-                                <td class="text-center"><button type="button" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                                <td class="text-center"><button type="submit" id="addbed" onclick=addbed(<?php //echo $; ?>) name="addbed" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง">
+                                <i class="fa fa-plus" aria-hidden="true"></i><?php echo $bedno;?>
+                            </button></td>
 
 
                             </tr>

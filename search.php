@@ -89,7 +89,7 @@ if (pg_num_rows($result) > 0) {
 							} else {
 								//swal("ไม่สำเร็จ!", "มีข้อมูลผิดพลาดในระบบ!", "warning");
 								alert(result.message);
-								window.location.href = 'main_ward.php';
+							//	window.location.href = 'main_ward.php';
 							}
 						}
 					});

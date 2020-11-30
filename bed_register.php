@@ -154,18 +154,18 @@ while($row     = mysqli_fetch_array($res)){
                 <div class="col-md-12">
                     <div class="row">
                         <?php
-                        $badin = "50";
                         foreach ($results as $key => $value) {
+                            $bedno    = $value->bedno;
+                            $roomname = $value->roomname;
                             // foreach($res as $item) {
                             //     $ward = $item['ward'];
                             //     $regis_total   = $item['regis_total']; 
                             //     if($ward == $value->ward){
                         ?>
                             <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#<?php //echo  $value->bedno; ?>"> -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $ward; ?>">
-
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" data-target="#bed<?php echo $ward; ?>" style="margin-bottom: 10px;" data-toggle="modal" >
                                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
-                                    <h4 class="text-left text-uppercase "><b><?php echo  $value->bedno . " <span class='css-room'>(" . $value->roomname . ")</span>"; ?></b></h4>
+                                    <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $roomname . ")</span>"; ?></b></h4>
                                     <div class="row vertical-center-box vertical-center-box-tablet">
                                         <div class="col-xs-3 mar-bot-15 text-left">
                                             <label class="label ">
@@ -198,8 +198,6 @@ while($row     = mysqli_fetch_array($res)){
                                 </div>
                             </div>
                             <?php include "modal_register.php"; ?>
-
-
                         <?php
                             //         }
                             //  }
