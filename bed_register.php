@@ -17,6 +17,37 @@ foreach ($results as $k => $v) {
 
 include "config/mysql_con.class.php";
 
+
+
+
+
+
+// SELECT n.icode,n.name AS ward_vip,w.ward,w.name as nameward
+//              FROM bedno as b
+//              INNER JOIN roomno AS r ON b.roomno = r.roomno
+//              INNER JOIN ward AS w ON w.ward = r.ward
+//              INNER JOIN roomtype AS t ON t.roomtype = r.roomtype
+//              LEFT JOIN room_status_type AS s ON s.room_status_type_id = r.room_status_type_id
+//              LEFT JOIN nondrugitems AS n ON n.icode = b.room_charge_icode
+//              WHERE 1 = 1 
+//              AND w.ward = '10'
+//              AND t.roomtype = '2' 
+//              AND b.bedtype = '2'
+//              ORDER BY bedno ASC
+
+
+
+
+
+
+
+$sql_bed = " SELECT a.roomno,a.bedno AS bed_main,a.ward_vip,a.ward,a.nameward,a.icode,b.bedno
+FROM vipbed_bedno as a
+LEFT JOIN vipbed_register as b ON b.bedno = a.bedno
+WHERE a.ward = '$ward' ";
+$bed     = mysqli_query($con, $sql_bed);
+
+
 $sql = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y'  ";
 $res = mysqli_query($con,$sql);
 $resdetail = mysqli_query($con,$sql);
@@ -42,7 +73,7 @@ while($row     = mysqli_fetch_array($res)){
             <div class="nalika-profile">
                 <div class="profile-dtl">
                     <a href="#"><img src="<?php echo $logo; ?>" alt="" /></a>
-                    <h2>Test <span class="min-dtn">Vip Room</span></h2>
+                    <h2>VipBed<span class="min-dtn"> Room</span></h2>
                 </div>
             </div>
             <?php include "function/menuleft.php"; ?>
@@ -149,24 +180,35 @@ while($row     = mysqli_fetch_array($res)){
                 </div>
             </div>
         </div>
+
+
         <div class="section-admin container-fluid">
             <div class="row admin text-center">
                 <div class="col-md-12">
                     <div class="row">
                         <?php
-                        foreach ($results as $key => $value) {
-                            $bedno    = $value->bedno;
-                            $roomname = $value->roomname;
-                            // foreach($res as $item) {
-                            //     $ward = $item['ward'];
-                            //     $regis_total   = $item['regis_total']; 
-                            //     if($ward == $value->ward){
+                         foreach ($bed as $value) {
+                            $ward        = $value['ward'];
+                            $bed_main        = $value['bed_main'];
+                            $ward_vip    = $value['ward_vip'];
+                            $roomname    = $value['roomno'];
+                            
+                        //    $total       = $value['total'];
+                        //    a.roomno,a.bedno,a.ward_vip,a.ward,a.nameward,a.icode,b.bedid
+                          
+                            // foreach($inbed as $item) {
+                            //      $bedid = $item['bedno'];
+                            //      $bedin = $item['bedid'];
+                            //      if($bedid == $bedno){
+     
                         ?>
+                                      
+<!-- ######################## -->
                             <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#<?php //echo  $value->bedno; ?>"> -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $value->bedno;  ?>">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $bed_main;  ?>">
 
                                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
-                                    <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $roomname . ")</span>"; ?></b></h4>
+                                    <h4 class="text-left text-uppercase "><b><?php echo  $bed_main . " <span class='css-room'>(" . $ward_vip." ".$bed_main. ")</span>"; ?></b></h4>
                                     <div class="row vertical-center-box vertical-center-box-tablet">
                                         <div class="col-xs-3 mar-bot-15 text-left">
                                             <label class="label ">
@@ -199,15 +241,22 @@ while($row     = mysqli_fetch_array($res)){
                                 </div>
                             </div>
                             <?php include "modal_register.php"; ?>
+
+
+
+                            <!-- ############### -->
                         <?php
-                            //         }
-                            //  }
+                                   //  }
+                           //   }
                         }
                         ?>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
         <br><br><br>
         
         <?php include "function/footer.php"; ?>

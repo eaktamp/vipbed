@@ -1,4 +1,3 @@
-
 <!-- Add_จอง -->
 
 <div class="modal fade" id="<?php echo $ward; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -14,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <input type="text" class="form-control" onkeydown="return event.key != 'Enter';" name="hn" id="hn" onkeypress="return isNumberKey(event)" placeholder="ระบุ HN...ที่ต้องการค้นหา ไม่ต้องเติม 0 ข้างหน้า" required />
-                            <!-- <input type="hidden" class="form-control" name="ward" id="ward" value="<?php //echo $ward; 
+                            <!-- <input type="hidden" class="form-control" name="ward" id="ward" value="<?php //echo $ward;
                                                                                                         ?>" /> -->
                         </div>
 
@@ -133,11 +132,9 @@
 
 <!-- ################ -->
 <!-- Modal show ที่จองแต่ละที่ รวม -->
-<div class="modal fade" id="bed<?php echo  $value->bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-
-    <div class="modal-dialog">
+<div class="modal fade" id="bed<?php echo  $bed_main; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
-
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  "โซน : " . $wardname . " <span class='css-room-modal-show'>( จำนวนจองคงเหลือ " .   $retVal = ($totalsex) ? "$totalsex" : "0"; ?> รายการ)</span></h5>
@@ -146,7 +143,7 @@
         </button> -->
             </div>
             <div class="modal-body">
-            <?php  echo $bbb =  $value->bedno;?>
+                <span class="bed-css_head"><?php echo $bed_main." </span> <span class='bed-css_detal'> ".$ward_vip; ?></span>
                 <table class="table table-hover">
                     <thead>
                         <tr class="head-detail-patient">
@@ -162,32 +159,70 @@
                     <tbody>
                         <?php
                         $sql2 = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y'  ";
-                        $resadd2 = mysqli_query($con,$sql2);
-                        $rw = 0;
-                       
+                        $resadd2 = mysqli_query($con, $sql2);
+                           $rw = 0;
                         while ($rowadd  = mysqli_fetch_array($resadd2)) {
                             $rw++;
-                           
+
                         ?>
-                            <tr>
-                                <td class="text-center"><?php echo $rw; ?></td>
-                                <td class="text-center"> <?php echo $rowadd['hn']; ?></td>
-                                <td class="text-left"> <?php echo $rowadd['pname'] . "" . $rowadd['fname'] . "  " . $rowadd['lname']; ?></td>
-                                <td class="text-center"> <?php echo $rowadd['age']; ?></td>
-                                <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
-                                <td class="text-center"> <?php echo $rowadd['dateupdate_register']; ?></td>
-                                <td class="text-center"><button type="button" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' '.$bbb;?></button></td>
 
+                            <form id="addbed" name="addbed" action="test.php" method="GET">
+                                <input type="hidden" name="id" id="id" value="<?php echo $rowadd['id']; ?>">
+                                <input type="hidden" name="an" id="an" value="<?php echo $rowadd['an']; ?>">
+                                <input type="hidden" name="ward" id="ward" value="<?php echo $ward; ?>">
+                                <input type="hidden" name="bed" id="bed" value="<?php echo $bed_main; ?>">
+                 
+                                <tr>
+                                    <td class="text-center"><?php echo $rw; ?></td>
+                                    <td class="text-center"> <?php echo $rowadd['hn']; ?></td>
+                                    <td class="text-left"> <?php echo $rowadd['pname'] . "" . $rowadd['fname'] . "  " . $rowadd['lname']; ?></td>
+                                    <td class="text-center"> <?php echo $rowadd['age']; ?></td>
+                                    <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
+                                    <td class="text-center"> <?php echo $rowadd['dateupdate_register']; ?></td>
+                                    <td class="text-center"><button type="submit" id="submitbed" name="submitbed" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' ' . $bed_main; ?></button></td>
+                                
 
-                            </tr>
-                        <?php
+                                </tr>
+                                <form>          
+                            <?php
                         }
-                        ?>
+                            ?>
                     </tbody>
                 </table>
-
-                </table>
             </div>
+
+            <script type="text/javascript">
+			 $(document).ready(function() {
+			 	$("#submitbed").click(function(e) {
+					e.preventDefault();		
+					$.ajax({
+						type: "POST",
+						url: "addbed.php",
+						data: $("#addbed").serialize(),
+						success: function(result) {
+							console.log(result);
+							if (result.status == 1) {
+
+								alert(result.message);
+								// swal("สำเร็จ!", result.message, "success")
+								// .then((value) => {
+								// 	location.reload();
+								// });
+																	
+
+							} else {
+								//swal("ไม่สำเร็จ!", "มีข้อมูลผิดพลาดในระบบ!", "warning");
+								alert(result.message);
+							//	window.location.href = 'test.php';
+							}
+						}
+					});
+			 	});
+			
+			 });
+		</script>
+
+
             <br>
             <div class="modal-footer">
 

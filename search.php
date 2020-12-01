@@ -85,9 +85,10 @@ if (pg_num_rows($result) > 0) {
 							if (result.status == 1) {
 
 								//alert(result.message);
-								swal("สำเร็จ!", result.message, "success")
+								swal("จองสำเร็จ!", result.message, "success")
 								.then((value) => {
 									location.reload();
+									
 								});
 																	
 

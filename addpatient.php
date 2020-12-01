@@ -25,7 +25,7 @@ $query = mysqli_query($con,$sql);
  //echo json_encode(array('status' => '1','message'=> "$sql"));
 
 if($query) {
-	echo json_encode(array('status' => '1','message'=> 'บันทึกรายการสำเร็จ'));
+	echo json_encode(array('status' => '1','message'=> 'รอยืนยันรับเข้าห้องพิเศษ'));
 	
 	
 }
