@@ -132,9 +132,11 @@
 
 <!-- ################ -->
 <!-- Modal show ที่จองแต่ละที่ รวม -->
-<div class="modal fade" id="bed<?php echo  $bed_main; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="bed<?php echo  $bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
+
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  "โซน : " . $wardname . " <span class='css-room-modal-show'>( จำนวนจองคงเหลือ " .   $retVal = ($totalsex) ? "$totalsex" : "0"; ?> รายการ)</span></h5>
@@ -143,7 +145,7 @@
         </button> -->
             </div>
             <div class="modal-body">
-                <span class="bed-css_head"><?php echo $bed_main." </span> <span class='bed-css_detal'> ".$ward_vip; ?></span>
+                <?php echo $bed =  $value->bedno; ?>
                 <table class="table table-hover">
                     <thead>
                         <tr class="head-detail-patient">
@@ -170,7 +172,7 @@
                                 <input type="hidden" name="id" id="id" value="<?php echo $rowadd['id']; ?>">
                                 <input type="hidden" name="an" id="an" value="<?php echo $rowadd['an']; ?>">
                                 <input type="hidden" name="ward" id="ward" value="<?php echo $ward; ?>">
-                                <input type="hidden" name="bed" id="bed" value="<?php echo $bed_main; ?>">
+                                <input type="hidden" name="bed" id="bed" value="<?php echo $bed; ?>">
                  
                                 <tr>
                                     <td class="text-center"><?php echo $rw; ?></td>
@@ -179,7 +181,7 @@
                                     <td class="text-center"> <?php echo $rowadd['age']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['dateupdate_register']; ?></td>
-                                    <td class="text-center"><button type="submit" id="submitbed" name="submitbed" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' ' . $bed_main; ?></button></td>
+                                    <td class="text-center"><button type="submit" id="submitbed" name="submitbed" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' ' . $bed; ?></button></td>
                                 
 
                                 </tr>

@@ -6,57 +6,39 @@ date_default_timezone_set("Asia/Bangkok");
 
 $ward = $_GET['ward'];
 //$url = "http://" . $_SERVER['SERVER_NAME'] . ":3000/api/room/wardbed";
-$url = "http://172.16.28.169:3000/api/room/wardbed" . $ward;
-$contents = file_get_contents($url);
-$results = json_decode($contents);
+// $url = "http://172.16.28.169:3000/api/room/wardbed" . $ward;
+// $contents = file_get_contents($url);
+// $results = json_decode($contents);
 
-foreach ($results as $k => $v) {
-    $wardname = $v->wardname;
-    $total += COUNT($v->bedno);
-}
+// foreach ($results as $k => $v) {
+//     $wardname = $v->wardname;
+//     $total += COUNT($v->bedno);
+// }
 
 include "config/mysql_con.class.php";
 
-
-
-
-
-
-// SELECT n.icode,n.name AS ward_vip,w.ward,w.name as nameward
-//              FROM bedno as b
-//              INNER JOIN roomno AS r ON b.roomno = r.roomno
-//              INNER JOIN ward AS w ON w.ward = r.ward
-//              INNER JOIN roomtype AS t ON t.roomtype = r.roomtype
-//              LEFT JOIN room_status_type AS s ON s.room_status_type_id = r.room_status_type_id
-//              LEFT JOIN nondrugitems AS n ON n.icode = b.room_charge_icode
-//              WHERE 1 = 1 
-//              AND w.ward = '10'
-//              AND t.roomtype = '2' 
-//              AND b.bedtype = '2'
-//              ORDER BY bedno ASC
-
-
-
-
-
-
-
-$sql_bed = " SELECT a.roomno,a.bedno AS bed_main,a.ward_vip,a.ward,a.nameward,a.icode,b.bedno
+$sql = " SELECT * -- a.roomno,a.bedno,a.ward_vip,a.ward,a.nameward,a.icode,b.bedid
 FROM vipbed_bedno as a
-LEFT JOIN vipbed_register as b ON b.bedno = a.bedno
-WHERE a.ward = '$ward' ";
-$bed     = mysqli_query($con, $sql_bed);
+-- LEFT JOIN vipbed_register as b ON b.bedid = a.bedno
+WHERE ward = '$ward' ";
+$bedin_ward = mysqli_query($con,$sql);
+$bedin_total = mysqli_query($con,$sql);
+$bed_total = mysqli_num_rows($bedin_total);
+$head_wardname  = mysqli_fetch_array($bedin_total);
 
 
-$sql = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y'  ";
-$res = mysqli_query($con,$sql);
+
+// $sql = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y'  ";
+// $res = mysqli_query($con,$sql);
+/*
 $resdetail = mysqli_query($con,$sql);
 $resadd = mysqli_query($con,$sql);
+
 $row_cnt = mysqli_num_rows($res);
 while($row     = mysqli_fetch_array($res)){
     $totalsex += COUNT($row['sex']);
 }
-
+*/
 ?>
 
 <?php include "function/header.php"; ?>
@@ -149,8 +131,8 @@ while($row     = mysqli_fetch_array($res)){
                                             </a>
                                             <div class="breadcomb-ctn css-ward">
 
-                                                <h2 title=""><span class="vrz"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;<?php echo  $wardname; ?></span></h2>
-                                                <p>Bed Total ( <span class="bt"><?php echo $total; ?></span> ) <span class="bread-ntd"></span></p>
+                                                <h2 title=""><span class="vrz"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;<?php echo  $head_wardname['nameward']; ?></span></h2>
+                                                <p>Bed Total ( <span class="bt"><?php echo $bed_total; ?></span> ) <span class="bread-ntd"></span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -187,28 +169,22 @@ while($row     = mysqli_fetch_array($res)){
                 <div class="col-md-12">
                     <div class="row">
                         <?php
-                         foreach ($bed as $value) {
-                            $ward        = $value['ward'];
-                            $bed_main        = $value['bed_main'];
-                            $ward_vip    = $value['ward_vip'];
-                            $roomname    = $value['roomno'];
-                            
-                        //    $total       = $value['total'];
-                        //    a.roomno,a.bedno,a.ward_vip,a.ward,a.nameward,a.icode,b.bedid
-                          
-                            // foreach($inbed as $item) {
-                            //      $bedid = $item['bedno'];
-                            //      $bedin = $item['bedid'];
-                            //      if($bedid == $bedno){
+                        // foreach ($results as $key => $value) {
+                        //     $bedno    = $value->bedno;
+                        //     $roomname = $value->roomname;
+                              foreach($bedin_ward as $item) {
+                                     $bedno = $item['bedno'];
+                                     $ward_vip = $item['ward_vip'];
+                                //  if($bedid = $bedno){
      
                         ?>
                                       
 <!-- ######################## -->
                             <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#<?php //echo  $value->bedno; ?>"> -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $bed_main;  ?>">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $bedno;  ?>">
 
                                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
-                                    <h4 class="text-left text-uppercase "><b><?php echo  $bed_main . " <span class='css-room'>(" . $ward_vip." ".$bed_main. ")</span>"; ?></b></h4>
+                                    <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $ward_vip . ")</span>"; ?></b></h4>
                                     <div class="row vertical-center-box vertical-center-box-tablet">
                                         <div class="col-xs-3 mar-bot-15 text-left">
                                             <label class="label ">
@@ -246,7 +222,7 @@ while($row     = mysqli_fetch_array($res)){
 
                             <!-- ############### -->
                         <?php
-                                   //  }
+                                 //    }
                            //   }
                         }
                         ?>
