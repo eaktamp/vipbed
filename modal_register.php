@@ -109,8 +109,6 @@
                         ?>
                     </tbody>
                 </table>
-
-                </table>
             </div>
             <br>
             <div class="modal-footer">

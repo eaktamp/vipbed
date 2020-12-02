@@ -11,6 +11,7 @@ $sql = " SELECT a.bedno,a.ward_vip,a.ward,a.nameward
 ,b.bedno_in,b.id,b.pname,b.fname,b.lname
 ,b.age,b.sex,b.pttype,b.hn
 ,b.dateupdate_register,b.an,b.inbed_datetime
+,b.status_regis,a.img_room
 FROM vipbed_bedno AS a
 LEFT JOIN vipbed_register AS b ON b.bedno_in = a.bedno
  WHERE a.ward = '$ward' ";
@@ -204,6 +205,8 @@ while ($row     = mysqli_fetch_array($res)) {
                             $age        = $item['age'];
                             $sex        = $item['sex'];
                             $pttype     = $item['pttype'];
+                            $status_regis = $item['status_regis'];
+                            $img_room    = $item['img_room'];
                             $dateupdate_register = $item['dateupdate_register'];
                             $an                 = $item['an'];
                             $inbed_datetime        = $item['inbed_datetime'];
@@ -237,7 +240,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                         <div class="row vertical-center-box vertical-center-box-tablet">
                                             <div class="col-xs-3 mar-bot-15 text-left">
                                                 <label class="label ">
-                                                    <span class="beddetf" beddetf-md-tooltip="รูปห้อง">
+                                                    <span class="beddetf" beddetf-md-tooltip="รูปห้อง" data-toggle="modal" data-target="#img<?php echo $bedno; ?>">
                                                         <i class="fa fa-hospital-o" aria-hidden="true"></i>
                                                         <?php //echo $value->total; 
                                                         ?>
@@ -276,6 +279,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                     </div>
                                     </div>
                                     <?php include "modal_register.php"; ?>
+                                    <?php include "modal_imgroom.php"; ?>
                                 <?php
                             }
                                 ?>
