@@ -5,7 +5,7 @@
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  $wardname; ?></h5>
+                <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  $nameward; ?></h5>
             </div>
             <div class="modal-body">
                 <form id="search_hn" action="" method="POST">
@@ -30,11 +30,6 @@
             <br>
         </div>
         </form>
-
-        <!-- // ###################test########################### -->
-
-        <!-- // ################test############################## -->
-
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script> -->
         <script type="text/javascript">
@@ -70,13 +65,13 @@
 
 
 <!-- Modal show ที่จองแต่ละที่ รวม -->
-<div class="modal fade" id="showlist<?php echo  $ward; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="showlist<?php echo $ward; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  "โซน : " . $wardname . " <span class='css-room-modal-show'>( จำนวนจองคงเหลือ " .   $retVal = ($totalsex) ? "$totalsex" : "0"; ?> รายการ)</span></h5>
+                <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  "โซน : " . $nameward . " <span class='css-room-modal-show'>( จำนวนจองคงเหลือ " .   $retVal = ($totalsex) ? "$totalsex" : "0"; ?> รายการ)</span></h5>
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button> -->
@@ -132,20 +127,19 @@
 
 <!-- ################ -->
 <!-- Modal show ที่จองแต่ละที่ รวม -->
-<div class="modal fade" id="bed<?php echo  $bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="bed<?php echo $bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
     <div class="modal-dialog">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  "โซน : " . $wardname . " <span class='css-room-modal-show'>( จำนวนจองคงเหลือ " .   $retVal = ($totalsex) ? "$totalsex" : "0"; ?> รายการ)</span></h5>
+                <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  "โซน : " . $nameward . " <span class='css-room-modal-show'>( จำนวนจองคงเหลือ " .   $retVal = ($totalsex) ? "$totalsex" : "0"; ?> รายการ)</span></h5>
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button> -->
             </div>
             <div class="modal-body">
-                <?php echo $bed =  $value->bedno; ?>
                 <table class="table table-hover">
                     <thead>
                         <tr class="head-detail-patient">
@@ -172,7 +166,7 @@
                                 <input type="hidden" name="id" id="id" value="<?php echo $rowadd['id']; ?>">
                                 <input type="hidden" name="an" id="an" value="<?php echo $rowadd['an']; ?>">
                                 <input type="hidden" name="ward" id="ward" value="<?php echo $ward; ?>">
-                                <input type="hidden" name="bed" id="bed" value="<?php echo $bed; ?>">
+                                <input type="hidden" name="bedno" id="bedno" value="<?php echo $bedno; ?>">
                  
                                 <tr>
                                     <td class="text-center"><?php echo $rw; ?></td>
@@ -181,7 +175,7 @@
                                     <td class="text-center"> <?php echo $rowadd['age']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['dateupdate_register']; ?></td>
-                                    <td class="text-center"><button type="submit" id="submitbed" name="submitbed" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' ' . $bed; ?></button></td>
+                                    <td class="text-center"><button type="submit" id="submitbed" name="submitbed" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' ' . $bedno; ?></button></td>
                                 </tr>
                         </form>          
                         <?php
@@ -190,39 +184,7 @@
                     </tbody>
                 </table>
             </div>
-        <!-- 
-            <script type="text/javascript">
-			 $(document).ready(function() {
-			 	$("#submitbed").click(function(e) {
-					e.preventDefault();		
-					$.ajax({
-						type: "POST",
-						url: "addbed.php",
-						data: $("#addbed").serialize(),
-						success: function(result) {
-							console.log(result);
-							if (result.status == 1) {
-
-								alert(result.message);
-								// swal("สำเร็จ!", result.message, "success")
-								// .then((value) => {
-								// 	location.reload();
-								// });
-																	
-
-							} else {
-								//swal("ไม่สำเร็จ!", "มีข้อมูลผิดพลาดในระบบ!", "warning");
-								alert(result.message);
-							//	window.location.href = 'test.php';
-							}
-						}
-					});
-			 	});
-			
-			 });
-		</script> -->
-
-
+    
             <br>
             <div class="modal-footer">
 
@@ -232,4 +194,3 @@
         </div>
     </div>
 </div>
-<!-- ############### -->

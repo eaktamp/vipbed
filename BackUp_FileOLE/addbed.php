@@ -5,16 +5,15 @@ date_default_timezone_set('asia/bangkok');
 include("config/mysql_con.class.php");
 $id            = $_POST['id'];
 $roomid        = $_POST['ward'];
-$an            = $_POST['an'];
-$bedno      = $_POST['bed_main'];
+$bedno_in      = $_POST['bed_main'];
 $inbed_datetime = DATE('Y-m-d H:i:s');
-$inbed_userupdate = 'USERINTEST';
+$inbed_userupdate = 'User_Update';
 $status_regis = "S";
 
 
 $sql = " UPDATE vipbed_register
          SET roomid  = '$roomid', 
-             bedno  = '$bedno', 
+             bedno_in  = '$bedno_in', 
              status_regis = 'S', 
              an = '$an',
              inbed_datetime = '$inbed_datetime',

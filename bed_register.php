@@ -5,46 +5,36 @@ include "function/autoload.php";
 date_default_timezone_set("Asia/Bangkok");
 
 $ward = $_GET['ward'];
-//$url = "http://" . $_SERVER['SERVER_NAME'] . ":3000/api/room/wardbed";
-// $url = "http://172.16.28.169:3000/api/room/wardbed" . $ward;
-// $contents = file_get_contents($url);
-// $results = json_decode($contents);
-
-// foreach ($results as $k => $v) {
-//     $wardname = $v->wardname;
-//     $total += COUNT($v->bedno);
-// }
-
 include "config/mysql_con.class.php";
 
-$sql = " SELECT * -- a.roomno,a.bedno,a.ward_vip,a.ward,a.nameward,a.icode,b.bedid
-FROM vipbed_bedno as a
--- LEFT JOIN vipbed_register as b ON b.bedid = a.bedno
-WHERE ward = '$ward' ";
-$bedin_ward = mysqli_query($con,$sql);
-$bedin_total = mysqli_query($con,$sql);
+$sql = " SELECT a.bedno,a.ward_vip,a.ward,a.nameward
+,b.bedno_in,b.id,b.pname,b.fname,b.lname
+,b.age,b.sex,b.pttype,b.hn
+,b.dateupdate_register,b.an,b.inbed_datetime
+FROM vipbed_bedno AS a
+LEFT JOIN vipbed_register AS b ON b.bedno_in = a.bedno
+ WHERE a.ward = '$ward' ";
+$bedin_ward = mysqli_query($con, $sql);
+$bedin_total = mysqli_query($con, $sql);
 $bed_total = mysqli_num_rows($bedin_total);
 $head_wardname  = mysqli_fetch_array($bedin_total);
 
-
-
-// $sql = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y'  ";
-// $res = mysqli_query($con,$sql);
-/*
-$resdetail = mysqli_query($con,$sql);
-$resadd = mysqli_query($con,$sql);
-
+$sql = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y' ";
+$res = mysqli_query($con, $sql);
+$resdetail = mysqli_query($con, $sql);
+$resadd = mysqli_query($con, $sql);
 $row_cnt = mysqli_num_rows($res);
-while($row     = mysqli_fetch_array($res)){
-    $totalsex += COUNT($row['sex']);
+
+while ($row     = mysqli_fetch_array($res)) {
+    $totalsex += COUNT($row['id']);
 }
-*/
+
 ?>
 
 <?php include "function/header.php"; ?>
 
-
 <body>
+
     <button onclick="topFunction()" id="myBtn" title="กลับบนสุด">Top</button>
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
@@ -138,7 +128,6 @@ while($row     = mysqli_fetch_array($res)){
                                     </div>
                                     <div class="col-lg- col-md-2 col-sm-2 col-xs-3">
                                         <div class="breadcomb-report">
-                                            <!-- <button data-toggle="" data-placement="" value="" class="btn btn-info btn-block">จองห้อง</button> -->
                                         </div>
                                     </div>
                                     <div class="col-lg- col-md-2 col-sm-2 col-xs-3">
@@ -149,9 +138,8 @@ while($row     = mysqli_fetch_array($res)){
                                     <div class="col-lg- col-md-2 col-sm-2 col-xs-3">
                                         <div class="">
                                             <button class="btn btn-block btn-show-add" data-toggle="modal" data-target="#showlist<?php echo  $ward; ?>">
-                                                <i class="fa fa-male" aria-hidden="true"></i> 
-                                                <i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;จำนวนจอง &nbsp;&nbsp;<?php echo $row_cnt;?> &nbsp;รายการ
-
+                                                <i class="fa fa-male" aria-hidden="true"></i>
+                                                <i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;จำนวนจอง &nbsp;&nbsp;<?php echo $row_cnt; ?> &nbsp;รายการ
                                             </button>
                                         </div>
                                     </div>
@@ -168,76 +156,139 @@ while($row     = mysqli_fetch_array($res)){
             <div class="row admin text-center">
                 <div class="col-md-12">
                     <div class="row">
+
                         <?php
-                        // foreach ($results as $key => $value) {
-                        //     $bedno    = $value->bedno;
-                        //     $roomname = $value->roomname;
-                              foreach($bedin_ward as $item) {
-                                     $bedno = $item['bedno'];
-                                     $ward_vip = $item['ward_vip'];
-                                //  if($bedid = $bedno){
-     
-                        ?>
-                                      
-<!-- ######################## -->
-                            <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#<?php //echo  $value->bedno; ?>"> -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $bedno;  ?>">
+                        // UPDATE รับผู้ป่วยเข้าเตียงตาม id 
+                        $id            = $_POST['id'];
+                        $roomid        = $_POST['ward'];
+                        $bedno_in       =  $_POST['bedno'];;
+                        $inbed_datetime = DATE('Y-m-d H:i:s');
+                        $inbed_userupdate = 'USERINTEST';
+                        $status_regis = "S";
 
-                                <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
-                                    <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $ward_vip . ")</span>"; ?></b></h4>
-                                    <div class="row vertical-center-box vertical-center-box-tablet">
-                                        <div class="col-xs-3 mar-bot-15 text-left">
-                                            <label class="label ">
-                                                <span class="beddetf" beddetf-md-tooltip="รูปห้อง">
-                                                    <i class="fa fa-hospital-o" aria-hidden="true"></i>
-                                                    <?php //echo $value->total; 
-                                                    ?>
-                                                </span>
-                                                <span class="bedfull" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
-                                                    <?php //echo $value->total; 
-                                                    ?>
-                                                    <i class="fa fa-cc-visa" aria-hidden="true"></i>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <div class="col-xs-9 cus-gh-hd-pro">
-                                            <h2 class="text-right no-margin total c-p"><?php //echo $regis_total;
-                                                                                        ?>
-                                                <i class="fa fa-male" aria-hidden="true"></i>
-                                                <i class="fa fa-female" aria-hidden="true"></i>
-                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        $sql = " UPDATE vipbed_register
+                                SET roomid  = '$roomid', 
+                                    bedno_in  = '$bedno_in', 
+                                    status_regis = 'S', 
+                                    inbed_datetime = '$inbed_datetime',
+                                    inbed_userupdate = '$inbed_userupdate'
+                                WHERE id = $id ";
+                        $query = mysqli_query($con, $sql);
 
-                                            </h2>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-mini">
-                                        <div style="width: <?php //echo $value->total * 100 / $badin;
-                                                            ?>%" class="progress-bar bg-red"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php include "modal_register.php"; ?>
-
-
-
-                            <!-- ############### -->
-                        <?php
-                                 //    }
-                           //   }
+                        if (isset($id)) {
+                            if ($query) {
+                                echo '<script>
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "สำเร็จ",
+                                            text: "แก้ไขข้อมูลสำเร็จ!",
+                                            type: "success"
+                                        }).then(function() {
+                                            window.location = "./bed_register.php?ward=' . $ward . '";
+                                        });
+                                        </script>';
+                            } else {
+                                echo "<script>Swal.fire({icon: 'error', title: 'Invalid...', text: 'ผิดพลาดอัพโหลดไม่สำเร็จ', })</script>";
+                            }
                         }
+                        foreach ($bedin_ward as $item) {
+                            $bedno     = $item['bedno'];
+                            $nameward  = $item['nameward'];
+                            $ward_vip  = $item['ward_vip'];
+                            $bedno_in   = $item['bedno_in'];
+                            $id         = $item['id'];
+                            $hn         = $item['hn'];
+                            $pname      = $item['pname'];
+                            $fname      = $item['fname'];
+                            $lname      = $item['lname'];
+                            $age        = $item['age'];
+                            $sex        = $item['sex'];
+                            $pttype     = $item['pttype'];
+                            $dateupdate_register = $item['dateupdate_register'];
+                            $an                 = $item['an'];
+                            $inbed_datetime        = $item['inbed_datetime'];
                         ?>
+
+                            <?php if ($bedno_in == NULL) { ?>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $bedno;  ?>">
+                                <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
+                                        <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $ward_vip . ")</span>"; ?></b></h4>
+                                        <div class="row vertical-center-box vertical-center-box-tablet">
+                                            <div class="col-xs-3 mar-bot-15 text-left">
+                                                <label class="label ">
+                                                    <span class="beddetf" beddetf-md-tooltip="รูปห้อง">
+                                                        <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                                                        <?php //echo $value->total; 
+                                                        ?>
+                                                    </span>
+                                                    <span class="bedfull" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
+                                                        <?php //echo $value->total; 
+                                                        ?>
+                                                        <i class="fa fa-cc-visa" aria-hidden="true"></i>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                <?php
+                            } else {
+                                ?>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-full-bed" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bedfull<?php echo  $bedno;  ?>">
+                                    <div class="admin-content analysis-progrebar-ctn res-mg-t-15 ">
+                                        <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $ward_vip . ")</span>"; ?></b></h4>
+                                        <div class="row vertical-center-box vertical-center-box-tablet">
+                                            <div class="col-xs-3 mar-bot-15 text-left">
+                                                <label class="label ">
+                                                    <span class="beddetf" beddetf-md-tooltip="รูปห้อง">
+                                                        <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                                                        <?php //echo $value->total; 
+                                                        ?>
+                                                    </span>
+                                                    <span class="bedfull" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
+                                                        <?php //echo $value->total; 
+                                                        ?>
+                                                        <i class="fa fa-cc-visa" aria-hidden="true"></i>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                    <?php
+                                }
+                                    ?>
+
+                                            <div class="col-xs-9 cus-gh-hd-pro">
+                                                <h2 class="text-right no-margin total c-p">
+
+                                                    <?php
+                                                    if ($sex == '1') {
+                                                        echo "<i class='fa fa-male' aria-hidden='true' title='ชาย'></i>";
+                                                    } elseif ($sex == '2') {
+                                                        echo "<i class='fa fa-female' aria-hidden='true' title='หญิง'></i>";
+                                                    } else {
+                                                        echo "<i class='fa fa-info-circle' aria-hidden='true' title='ว่าง'></i>";
+                                                    }
+                                                    ?>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <div>
+                                        <?php echo $pname . "" . $fname . " " . $lname; ?>&nbsp;
+                                        </div>
+                                        <div class="">
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <?php include "modal_register.php"; ?>
+                                <?php
+                            }
+                                ?>
+                                </div>
                     </div>
                 </div>
             </div>
+
+            <br><br><br>
+
+            <?php include "function/footer.php"; ?>
         </div>
-
-
-
-        <br><br><br>
-        
-        <?php include "function/footer.php"; ?>
-    </div>
-    <?php include "function/js.php"; ?>
+        <?php include "function/js.php"; ?>
 </body>
 
 </html>

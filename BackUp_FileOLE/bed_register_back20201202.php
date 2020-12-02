@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 header('Access-Control-Allow-Origin: *');
@@ -18,11 +17,25 @@ $ward = $_GET['ward'];
 
 include "config/mysql_con.class.php";
 
-$sql = " SELECT * FROM vipbed_bedno as a WHERE ward = '$ward' ";
+$sql = " SELECT * -- a.roomno,a.bedno,a.ward_vip,a.ward,a.nameward,a.icode,b.bedid
+FROM vipbed_bedno as a
+-- LEFT JOIN vipbed_register as b ON b.bedid = a.bedno
+WHERE ward = '$ward' ";
 $bedin_ward = mysqli_query($con,$sql);
 $bedin_total = mysqli_query($con,$sql);
 $bed_total = mysqli_num_rows($bedin_total);
 $head_wardname  = mysqli_fetch_array($bedin_total);
+
+ $sql = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y'  ";
+ $res = mysqli_query($con,$sql);
+
+$resdetail = mysqli_query($con,$sql);
+$resadd = mysqli_query($con,$sql);
+
+$row_cnt = mysqli_num_rows($res);
+while($row     = mysqli_fetch_array($res)){
+    $totalsex += COUNT($row['sex']);
+}
 
 ?>
 
@@ -30,7 +43,6 @@ $head_wardname  = mysqli_fetch_array($bedin_total);
 
 
 <body>
-    
     <button onclick="topFunction()" id="myBtn" title="กลับบนสุด">Top</button>
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
@@ -154,54 +166,16 @@ $head_wardname  = mysqli_fetch_array($bedin_total);
             <div class="row admin text-center">
                 <div class="col-md-12">
                     <div class="row">
-
                         <?php
-                        // UPDATE รับผู้ป่วยเข้าเตียงตาม id 
-                                $id            = $_POST['id'];
-                                $roomid        = $_POST['ward'];
-                                $an            = $_POST['an'];
-                                $bedno      = $_POST['bed_main'];
-                                $inbed_datetime = DATE('Y-m-d H:i:s');
-                                $inbed_userupdate = 'USERINTEST';
-                                $status_regis = "S";
-
-                                $sql = " UPDATE vipbed_register
-                                SET roomid  = '$roomid', 
-                                    bedno  = '$bedno', 
-                                    status_regis = 'S', 
-                                    an = '$an',
-                                    inbed_datetime = '$inbed_datetime',
-                                    inbed_userupdate = '$inbed_userupdate'
-                                WHERE id = $id ";
-                                $query = mysqli_query($con, $sql);
-
-                                if(isset($id)){
-                                    if($query){
-                                        echo '<script>
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "สำเร็จ",
-                                            text: "แก้ไขข้อมูลสำเร็จ!",
-                                            type: "success"
-                                        }).then(function() {
-                                            window.location = "./testbed.php?ward='.$ward.'";
-                                        });
-                                        </script>';
-                                    }
-                                    else{
-                                    echo "<script>Swal.fire({icon: 'error', title: 'Invalid...', text: 'ผิดพลาดอัพโหลดไม่สำเร็จ', })</script>";
-                                    }                      
-                                }
-
                         // foreach ($results as $key => $value) {
                         //     $bedno    = $value->bedno;
                         //     $roomname = $value->roomname;
                               foreach($bedin_ward as $item) {
                                      $bedno = $item['bedno'];
                                      $ward_vip = $item['ward_vip'];
-                                //  if($bedid = $bedno){     
+                                //  if($bedid = $bedno){
+     
                         ?>
-                        
                                       
 <!-- ######################## -->
                             <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 10px;" data-toggle="modal" data-target="#<?php //echo  $value->bedno; ?>"> -->
@@ -249,8 +223,6 @@ $head_wardname  = mysqli_fetch_array($bedin_total);
                                  //    }
                            //   }
                         }
-
-                        
                         ?>
                     </div>
                 </div>
