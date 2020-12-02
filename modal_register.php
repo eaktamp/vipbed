@@ -168,7 +168,7 @@
 
                         ?>
 
-                            <form id="addbed" name="addbed" action="test.php" method="GET">
+                            <form id="addbed" name="addbed" action="#" method="post">
                                 <input type="hidden" name="id" id="id" value="<?php echo $rowadd['id']; ?>">
                                 <input type="hidden" name="an" id="an" value="<?php echo $rowadd['an']; ?>">
                                 <input type="hidden" name="ward" id="ward" value="<?php echo $ward; ?>">
@@ -182,17 +182,15 @@
                                     <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['dateupdate_register']; ?></td>
                                     <td class="text-center"><button type="submit" id="submitbed" name="submitbed" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' ' . $bed; ?></button></td>
-                                
-
                                 </tr>
-                                <form>          
-                            <?php
-                        }
-                            ?>
+                        </form>          
+                        <?php
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>
-
+        <!-- 
             <script type="text/javascript">
 			 $(document).ready(function() {
 			 	$("#submitbed").click(function(e) {
@@ -222,7 +220,7 @@
 			 	});
 			
 			 });
-		</script>
+		</script> -->
 
 
             <br>

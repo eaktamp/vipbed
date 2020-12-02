@@ -85,11 +85,14 @@ if (pg_num_rows($result) > 0) {
 							if (result.status == 1) {
 
 								//alert(result.message);
-								swal("จองสำเร็จ!", result.message, "success")
-								.then((value) => {
-									location.reload();
-									
-								});
+								Swal.fire({
+                                        icon: "success",
+                                        title: "สำเร็จ",
+                                        text: result.message,
+                                        type: "success"
+                                    }).then(function() {
+                                        location.reload();
+                                    });
 																	
 
 							} else {
