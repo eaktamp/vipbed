@@ -192,3 +192,67 @@
         </div>
     </div>
 </div>
+
+
+<!-- ################ -->
+<!-- Modal show คนใช้เตียง รายละเอียด และการจำหน่าย ออกจากเตียง -->
+<div class="modal fade" id="bedfull<?php echo $bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo "ข้อมูลการเข้าใช้ : ".$bedno; ?></h5>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="head-detail-patient">
+                            <th class="text-center">HN</th>
+                            <th class="text-left">ชื่อ นามสกุล</th>
+                            <th class="text-center">อายุ</th>
+                            <th class="text-center">สิทธิ</th>
+                            <th class="text-center">รับเข้า</th>
+                            <th class="text-center">จำหน่าย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $sql_dch = " SELECT * FROM vipbed_register WHERE bedno_in = '$bedno' AND status_regis = 'S'  ";
+                        $resadd2 = mysqli_query($con, $sql_dch);
+                        $rowadd  = mysqli_fetch_array($resadd2);
+                       
+
+                        ?>
+
+                            <form id="frm2" name="frm2" action="#" method="post">
+                                <input type="hidden" name="id" id="id" value="<?php echo $rowadd['id']; ?>">
+                                <input type="hidden" name="ward" id="ward" value="<?php echo $ward; ?>">
+                                <input type="hidden" name="bedno" id="bedno" value="<?php echo $bedno; ?>">
+                 
+                                <tr>
+                                    <td class="text-center"> <?php echo $rowadd['hn']; ?></td>
+                                    <td class="text-left"> <?php echo $rowadd['pname'] . "" . $rowadd['fname'] . "  " . $rowadd['lname']; ?></td>
+                                    <td class="text-center"> <?php echo $rowadd['age']; ?></td>
+                                    <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
+                                    <td class="text-center"> <?php echo $rowadd['inbed_datetime']; ?></td>
+                                    <td class="text-center"><button type="submit" id="submit_dch" name="submit_dch" class="btn btn-secondary btn-block btn-add" addbed-tooltip="จำหน่ายออกจากห้อง"><i class="fa fa-sign-out" aria-hidden="true"></i></button></td>
+                                </tr>
+                        </form>          
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            <div class="modal-footer">
+
+                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                <button type="button" class="btn btn-secondary btn-block btn-cloce" data-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
