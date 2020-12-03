@@ -8,7 +8,7 @@ $ward = $_GET['ward'];
 include "config/mysql_con.class.php";
 
 $sql = " SELECT a.bedno,a.ward_vip,a.ward,a.nameward
-,b.bedno_in,b.id,b.pname,b.fname,b.lname
+,b.bedno_in,b.id,b.pname,b.fname,b.lname,bedno_name
 ,b.age,b.sex,b.pttype,b.hn
 ,b.dateupdate_register,b.an,b.inbed_datetime
 ,b.status_regis,a.img_room,bed_status
@@ -161,46 +161,6 @@ while ($row     = mysqli_fetch_array($res)) {
 
                         <?php
 
-                        // UPDATE รับผู้ป่วยเข้าเตียงตาม id 
-                        /*
-                        $id            = $_POST['id'];
-                        $roomid        = $_POST['ward'];
-                        $bedno_in      =  $_POST['bedno'];;
-                        $inbed_datetime = DATE('Y-m-d H:i:s');
-                        $inbed_userupdate = 'USER_INTEST';
-                        $status_regis = "S";
-
-                        $sql = " UPDATE vipbed_register
-                                SET roomid  = '$roomid', 
-                                    bedno_in  = '$bedno_in', 
-                                    status_regis = 'S', 
-                                    inbed_datetime = '$inbed_datetime',
-                                    inbed_userupdate = '$inbed_userupdate'
-                                WHERE id = $id ";
-                        $query = mysqli_query($con, $sql);
-
-                        $sqlb2 = " UPDATE vipbed_bedno SET bed_status  = 'N' WHERE bedno = '$bedno_in' ";
-                        $queryb2 = mysqli_query($con, $sqlb2);
-
-                        if (isset($id)) {
-                            if ($query) {
-                                echo '<script>
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "สำเร็จ",
-                                            text: "แก้ไขข้อมูลสำเร็จ!",
-                                            type: "success"
-                                        }).then(function() {
-                                            window.location = "./bed_register.php?ward=' . $ward . '";
-                                        });
-                                        </script>';
-                            } else {
-                                echo "<script>Swal.fire({icon: 'error', title: 'Invalid...', text: 'ผิดพลาดอัพโหลดไม่สำเร็จ', })</script>";
-                            }
-                        }
-                        */
-                        // ?????????????
-
                         if (isset($_POST['submitbed'])) {
 
                             $id            = $_POST['id'];
@@ -248,7 +208,9 @@ while ($row     = mysqli_fetch_array($res)) {
                             $sql = " UPDATE vipbed_register
                                         SET status_regis = 'D', 
                                             dch_datetime = '$dch_datetime',
-                                            dch_user = 'USER_DCH'
+                                            dch_user = 'USER_DCH',
+                                            bedno_name = '$bedno_in',
+                                            bedno_in = ''
                                         WHERE id = '$id' ";
                             $query = mysqli_query($con, $sql);
 
@@ -333,6 +295,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                                                 </span>
                                                             </label>
                                                         </div>
+                                                        
                                                     <?php
                                                 }
                                                     ?>
@@ -359,6 +322,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <?php include "modal_register.php"; ?>
                                             <?php include "modal_imgroom.php"; ?>
                                         <?php
