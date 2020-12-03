@@ -14,7 +14,7 @@ include("config/mysql_con.class.php");
 	$pttype    	= $_POST['pttype'];
 	$birthday  	= $_POST['birthday'];
 	$age 		 = $_POST['age'];
-	$userupdate_register = "Test";
+	$userupdate_register = "User_Regis";
 	$status_regis = "Y";
 	
 

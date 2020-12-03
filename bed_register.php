@@ -6,6 +6,7 @@ date_default_timezone_set("Asia/Bangkok");
 
 $ward = $_GET['ward'];
 include "config/mysql_con.class.php";
+include "config/pg_con.class.php";
 
 $sql = " SELECT a.bedno,a.ward_vip,a.ward,a.nameward
 ,b.bedno_in,b.id,b.pname,b.fname,b.lname,bedno_name
@@ -164,15 +165,24 @@ while ($row     = mysqli_fetch_array($res)) {
                         if (isset($_POST['submitbed'])) {
 
                             $id            = $_POST['id'];
+                            $hn            = $_POST['hn'];
                             $roomid        = $_POST['ward'];
                             $bedno_in      =  $_POST['bedno'];;
                             $inbed_datetime = DATE('Y-m-d H:i:s');
                             $inbed_userupdate = 'USER_INTEST';
                             $status_regis = "S";
 
+                            $query_an = " SELECT an FROM ipt WHERE 1 = 1 AND hn = '$hn' AND dchdate IS NULL ";
+                            $result_an = pg_query($conn, $query_an);
+                            $row_an    = pg_fetch_array($result_an);
+                            $an         = $row_an['an'];
+
+                             if ($an != NULL ) {
+                               
                             $sql = " UPDATE vipbed_register
                                         SET roomid  = '$roomid', 
-                                            bedno_in  = '$bedno_in', 
+                                            bedno_in  = '$bedno_in',
+                                            an       = '$an', 
                                             status_regis = 'S', 
                                             inbed_datetime = '$inbed_datetime',
                                             inbed_userupdate = '$inbed_userupdate'
@@ -195,7 +205,16 @@ while ($row     = mysqli_fetch_array($res)) {
                             } else {
                                 echo "<script>Swal.fire({icon: 'error', title: 'Invalid...', text: 'ผิดพลาดอัพโหลดไม่สำเร็จ', })</script>";
                             }
+                      
+
+                        } else {
+                            echo "<script>Swal.fire({icon: 'error', title: 'ยังไม่ Admit', text: 'ยังไม่เป็นผู้ป่วยในของโรงพยาบาล', })</script>";
                         }
+
+
+                    }
+
+                    
                         if (isset($_POST['submit_dch'])) {
 
                             $id            = $_POST['id'];
@@ -221,7 +240,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                         Swal.fire({
                                             icon: "success",
                                             title: "สำเร็จ",
-                                            text: "จำหน่ายออกจากจากห้องพิเศษแล้ว!",
+                                            text: "จำหน่ายออกจากห้องพิเศษแล้ว!",
                                             type: "success"
                                         }).then(function() {
                                             window.location = "./bed_register.php?ward=' . $ward . '";
@@ -231,9 +250,6 @@ while ($row     = mysqli_fetch_array($res)) {
                                 echo "<script>Swal.fire({icon: 'error', title: 'Invalid...', text: 'ข้อมูลผิดพลาด ทำรายการไม่สำเร็จ', })</script>";
                             }
                         }
-
-                        // ??????????????
-
                         foreach ($bedin_ward as $item) {
                             $bedno     = $item['bedno'];
                             $nameward  = $item['nameward'];
@@ -251,7 +267,7 @@ while ($row     = mysqli_fetch_array($res)) {
                             $bed_status = $item['bed_status'];
                             $img_room    = $item['img_room'];
                             $dateupdate_register = $item['dateupdate_register'];
-                            $an                 = $item['an'];
+                           // $an                 = $item['an'];
                             $inbed_datetime        = $item['inbed_datetime'];
                         ?>
 
@@ -295,7 +311,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                                                 </span>
                                                             </label>
                                                         </div>
-                                                        
+
                                                     <?php
                                                 }
                                                     ?>

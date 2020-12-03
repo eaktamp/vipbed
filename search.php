@@ -51,7 +51,7 @@ if (pg_num_rows($result) > 0) {
 		<input type="hidden" name="age" id="age" value="<?php echo $age; ?>">
 		<form>
 
-			<button type="submit" class="btn btn-block btn-select" id="submit" value="submit" name="submit" bedfull-md-tooltip="คลิกเพื่อจอง">
+			<button type="submit" class="btn btn-block btn-select" id="submit_regis" value="" name="submit_regis" bedfull-md-tooltip="คลิกเพื่อจอง">
 				<?php echo $hn; ?>
 				<?php echo " " . $pname . "" . $fname . " " . $lname; ?>
 				<?php echo  " " . $row['gender_text']; ?>
@@ -74,7 +74,7 @@ if (pg_num_rows($result) > 0) {
 			// }
 
 			 $(document).ready(function() {
-			 	$("#submit").click(function(e) {
+			 	$("#submit_regis").click(function(e) {
 					e.preventDefault();		
 					$.ajax({
 						type: "POST",

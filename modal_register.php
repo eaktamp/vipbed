@@ -127,7 +127,7 @@
 <!-- Modal show ที่จองแต่ละที่ รวม -->
 <div class="modal fade" id="bed<?php echo $bedno; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <!-- <div class="modal-dialog-full-width modal-dialog momodel modal-fluid"> -->
 
         <div class="modal-content">
@@ -162,7 +162,7 @@
 
                             <form id="addbed" name="addbed" action="#" method="post">
                                 <input type="hidden" name="id" id="id" value="<?php echo $rowadd['id']; ?>">
-                                <input type="hidden" name="an" id="an" value="<?php echo $rowadd['an']; ?>">
+                                <input type="hidden" name="hn" id="hn" value="<?php echo $rowadd['hn']; ?>">
                                 <input type="hidden" name="ward" id="ward" value="<?php echo $ward; ?>">
                                 <input type="hidden" name="bedno" id="bedno" value="<?php echo $bedno; ?>">
                  
@@ -192,7 +192,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- ################ -->
 <!-- Modal show คนใช้เตียง รายละเอียด และการจำหน่าย ออกจากเตียง -->
@@ -226,7 +225,6 @@
                         $resadd2 = mysqli_query($con, $sql_dch);
                         $rowadd  = mysqli_fetch_array($resadd2);
                        
-
                         ?>
 
                             <form id="frm2" name="frm2" action="#" method="post">
