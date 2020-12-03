@@ -331,8 +331,9 @@ while ($row     = mysqli_fetch_array($res)) {
                                                         </h2>
                                                     </div>
                                                     </div>
-                                                    <div>
+                                                    <div style="color:red;"><b>
                                                         <?php echo $pname . "" . $fname . " " . $lname; ?>&nbsp;
+                                                        </b>
                                                     </div>
                                                     <div class="">
                                                     </div>
