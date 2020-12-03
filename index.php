@@ -2,34 +2,24 @@
 session_start();
 include "function/autoload.php";
 date_default_timezone_set("Asia/Bangkok");
-// $url = "http://" . $_SERVER['SERVER_NAME'] . ":3000/api/room";
-// $url = "http://172.16.28.169:3000/api/room";
-// $contents = file_get_contents($url);
-// $results = json_decode($contents);
-// foreach ($results as $k => $v) {
-//     $total += $v->total;
-// }
-
 include "config/mysql_con.class.php";
-
-$sqlsum_bed = " SELECT COUNT(*) AS sumbed FROM vipbed_bedno";
-$sumbed = mysqli_query($con, $sqlsum_bed);
-$row_sum     = mysqli_fetch_array($sumbed);
-
-
-$sqlcward = " SELECT ward,nameward,COUNT(ward) AS total
+$sql_countward = " SELECT ward,nameward,COUNT(ward) AS total
 FROM vipbed_bedno
-GROUP BY ward,nameward ";
-$wtotal = mysqli_query($con, $sqlcward);
-$row_sumward = mysqli_num_rows($wtotal);
+GROUP BY ward,nameward
+ORDER BY total ";
+$wtotal = mysqli_query($con, $sql_countward);
+$ward_total = mysqli_num_rows($wtotal);
 
+$sql_sumbed = " SELECT COUNT(bedno) AS totalbed FROM vipbed_bedno ";
+$sumbed     = mysqli_query($con, $sql_sumbed);
+$rowbed     = mysqli_fetch_array($sumbed);
+$totalbed   =  $rowbed['totalbed'];
 
 $sql = " SELECT ward as ward
         ,(SELECT COUNT(*) FROM vipbed_register AS b WHERE b.status_regis = 'Y' AND a.ward = b.ward  ) AS regis_total
         ,(SELECT COUNT(*) FROM vipbed_register AS b WHERE b.status_regis = 'S' AND a.ward = b.ward  ) AS regis_inbed
         FROM vipbed_ward As a ";
 $res = mysqli_query($con, $sql);
-
 ?>
 
 <?php include "function/header.php"; ?>
@@ -117,8 +107,8 @@ $res = mysqli_query($con, $sql);
                                             </div>
                                             <div class="breadcomb-ctn css-ward">
 
-                                                <h2 title="จำนวนโซนห้องพิเศษ">Vip Room Zone ( <span class="vrz"><?php echo $row_sumward; ?></span> )</h2>
-                                                <p bedtotal-tooltip="จำนวนเตียวพิเศษทั้งหมด">Bed Total ( <span class="bt"><?php echo $row_sum['sumbed']; ?></span> ) <span class="bread-ntd"></span></p>
+                                                <h2 title="จำนวนโซนห้องพิเศษ">Vip Room Zone ( <span class="vrz"><?php echo $ward_total; ?></span> )</h2>
+                                                <p bedtotal-tooltip="จำนวนเตียวพิเศษทั้งหมด">Bed Total ( <span class="bt"><?php echo $totalbed; ?></span> ) <span class="bread-ntd"></span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -143,46 +133,49 @@ $res = mysqli_query($con, $sql);
                     <div class="row">
                         <?php
                         foreach ($wtotal as $value) {
-                            $ward      = $value['ward'];
-                            $nameward  = $value['nameward'];
-                            $total     = $value['total'];
-                            foreach ($res as $item) {
-                                $ward_check    = $item['ward'];
-                                $regis_total   = $item['regis_total'];
-                                $regis_inbed   = $item['regis_inbed'];
-                                if ($ward_check == $ward) {
+                            $ward        = $value['ward'];
+                            $nameward    = $value['nameward'];
+                            $total       = $value['total'];
+    
+                            foreach($res as $item) {
+                                $wardin        = $item['ward'];
+                                $regis_total   = $item['regis_total']; 
+                                $regis_inbed   = $item['regis_inbed']; 
+                                if($wardin == $ward){
                         ?>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" onclick="window.location.href = 'bed_register.php?ward=<?php echo $ward; ?>'">
-                                        <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
-                                            <h4 class="text-left text-uppercase "><b><?php echo $nameward; ?></b></h4>
-                                            <div class="row vertical-center-box vertical-center-box-tablet">
-                                                <div class="col-xs-3 mar-bot-15 text-left">
-                                                    <label class="label ">
-                                                        <span class="beddetf" beddetf-md-tooltip="จำนวนเตียงทั้งหมด">
-                                                            <?php echo $total; ?>
-                                                        </span>
-                                                        <span class="bedfull" bedfull-md-tooltip="จำนวนเตียงที่ใช้งานอยู่">
-                                                            <?php echo $regis_inbed; ?>
-                                                        </span>
-                                                        <span class="bednull" null-md-tooltip="จำนวนเตียง ว่าง">
-                                                            <?php echo $total - $regis_inbed; ?>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                                <div class="col-xs-9 cus-gh-hd-pro">
-                                                    <h2 class="text-right no-margin total c-p" md-tooltip="จำนวนจอง"><span class="bedq"><?php echo $regis_total; ?></span>
-                                                        <i class="fa fa-bed" aria-hidden="true"></i>
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                            <div class="progress progress-mini">
-                                                <div style="width: <?php echo $regis_inbed * 100 / $total; ?>%" class="progress-bar bg-red"></div>
-                                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 hover-main" style="margin-bottom: 10px;" onclick="window.location.href = 'bed_register.php?ward=<?php echo $ward; ?>'">
+                                <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
+                                    <h4 class="text-left text-uppercase "><b><?php echo $nameward; ?></b></h4>
+                                    <br>
+                                    <div class="row vertical-center-box vertical-center-box-tablet">
+                                        <div class="col-xs-3 mar-bot-15 text-left">
+                                            <label class="label ">
+                                                <span class="beddetf" beddetf-md-tooltip="จำนวนเตียงทั้งหมด">
+                                                    <?php echo $total; ?>
+                                                </span>
+                                                <span class="bedfull" bedfull-md-tooltip="จำนวนเตียงที่ใช้งานอยู่">
+                                                    <?php echo $regis_inbed; ?>
+                                                </span>
+                                                <span class="bednull" null-md-tooltip="จำนวนเตียง ว่าง">
+                                                    <?php echo $total - $regis_inbed; ?>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-9 cus-gh-hd-pro">
+                                            <h2 class="text-right no-margin total c-p" md-tooltip="จำนวนจอง"><span class="bedq"><?php echo $regis_total; ?></span>
+                                                <i class="fa fa-bed" aria-hidden="true"></i>
+                                            </h2>
                                         </div>
                                     </div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: <?php echo $regis_inbed * 100 / $total; ?>%" class="progress-bar bg-red"></div>
+                                        <!-- <div   style="width: <?php //echo 13 * 0 /100;?>%" class="progress-bar bg-red"></div> -->
+                                    </div>
+                                </div>
+                            </div>
                         <?php
                                 }
-                            }
+                             }
                         }
                         ?>
                     </div>
