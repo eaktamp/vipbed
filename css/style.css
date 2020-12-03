@@ -19,7 +19,7 @@
 /*----------------------------------------*/
 /*  1.  Theme default CSS
 /*----------------------------------------*/
-html, body {height: 100%; font-family: 'Roboto', sans-serif;font-weight:400;background:#34495E;}
+html, body {height: 100%; font-family: 'Roboto', sans-serif;font-weight:400;background:#ffffff;}
 .floatleft {float:left}
 .floatright {float:right}
 .alignleft {float:left;margin-right:15px;margin-bottom: 15px}
@@ -117,9 +117,9 @@ body {}
     z-index: 9999;
     width: 240px;
 }
-#sidebar {
+#sidebar {/*แถบข้างซ้าย*/
     min-width: 205px;
-    background: #1b2a47;
+    background:#016738;
     /* background: green; */
     color: #fff;
 	position:fixed;
@@ -154,7 +154,7 @@ body {}
     padding: 1px 0px;
 	position: relative;
     z-index: 99999;
-    background: #1b2a47;
+    background: #016738;
 }
 #sidebar .sidebar-header strong {
     display: none;
@@ -164,7 +164,7 @@ body {}
     padding: 20px;
 	position: relative;
     z-index: 99999;
-    background: #1b2a47;
+    background: #016738;
 }
 .profile-dtl {
     text-align: center;
@@ -308,7 +308,7 @@ ul.dtl-social li a{
 }
 .footer-copyright-area {
     /* position: fixed; */
-    background: #102692;
+    background: #016738;
     padding: 20px 0px;
     text-align: center;
 }
@@ -800,7 +800,7 @@ ul.setting-panel-list li{
     right: 0;
 }
 .header-top-menu .navbar-nav>li .dropdown-menu, .header-right-info ul.header-right-menu li .author-message-top, .header-right-info ul.header-right-menu li .notification-author, .header-right-info ul.header-right-menu li .author-log, .header-right-info ul.header-right-menu li .admintab-wrap.menu-setting-wrap.menu-setting-wrap-bg.dropdown-menu {
-    background: #1b2a47;
+    background: #016738;
 }
 .header-top-menu .navbar-nav>li .dropdown-menu a:hover, .header-right-info ul.header-right-menu li .dropdown-header-top.author-log li a:hover, .header-right-info ul.header-right-menu li .dropdown-header-top.author-log li a:focus, .header-drl-controller-btn.btn-info:active:focus, .btn-info:active:hover {
     background: #34495E;
@@ -828,7 +828,7 @@ ul.setting-panel-list li{
 }
 .breadcome-list {
     padding:20px;
-	background:#1b2a47;
+	background:#015c31;
 	margin:30px 0px;
 }
 .breadcome-heading .form-control, .breadcome-heading .form-control:focus {
@@ -923,7 +923,7 @@ ul.breadcome-menu li a:hover{
 	margin: 5px 0px;
 }
 .breadcomb-report button{
-	background:#34495E;
+	background:#ffffff;
 }
 .breadcomb-report button:active, .breadcomb-report button:hover, .breadcomb-report button:focus, .breadcomb-report button:visited{
 	outline:none;
@@ -1006,14 +1006,14 @@ ul.breadcome-menu li a:hover{
     .room-free{
     border-radius: 8px;
     padding:20px;
-    background:#008B8B;
+    background:#028f4d;
     /* background:#1b2a47; */ 
     
     }
     .room-free:hover{
     border-radius: 8px;
     padding:20px;
-    background:#1b2a47;
+    background:#01502b;
     /* background:#1b2a47; */ 
     
     }
@@ -1259,7 +1259,7 @@ ul.two-part-sp li{
 }
 .header-top-area {
     position: fixed;
-    background: #1b2a47;
+    background:#02743f;
     z-index: 99;
     left: 200px;
     right: 0;
@@ -3700,7 +3700,7 @@ th.fc-day-header.fc-widget-header {
 	display:none;
 }
 .mini-navbar .profile-dtl img {
-    height: 50px;
+    height: 40px;
 }
 .fc tbody .fc-row .fc-content-skeleton tbody tr:last-child td {
    padding-bottom: 0px;
@@ -3721,7 +3721,7 @@ th.fc-day-header.fc-widget-header {
     padding: 16px 15px;
 }
 .review-pro-edt.mg-b-0-pt{
-	margin-bottom:0px;
+	margin-bottom:0px;  
 }
 .review-pro-edt button{
 	padding:5px 15px;
