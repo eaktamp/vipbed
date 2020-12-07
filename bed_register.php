@@ -127,7 +127,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                             </a>
                                             <div class="breadcomb-ctn css-ward">
 
-                                                <h2 title=""><span class="vrz"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;<?php echo  $head_wardname['nameward']; ?></span></h2>
+                                                <h2 title="" style= "margin: 0 0 0px;"><span class="vrz"style= "color: #ffffff;"><i class="fa fa-map-marker" aria-hidden="true"style= "color: #f70103;"></i>&nbsp;<?php echo  $head_wardname['nameward']; ?></span></h2>
                                                 <p>Bed Total ( <span class="bt"><?php echo $bed_total; ?></span> ) <span class="bread-ntd"></span></p>
                                             </div>
                                         </div>
@@ -356,8 +356,6 @@ while ($row     = mysqli_fetch_array($res)) {
                                     </div>
                                 </div>
                     </div>
-
-                    <br><br><br>
 
                     <?php include "function/footer.php"; ?>
                 </div>
