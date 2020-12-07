@@ -12,9 +12,10 @@ $sql = " SELECT a.bedno,a.ward_vip,a.ward,a.nameward
 ,b.bedno_in,b.id,b.pname,b.fname,b.lname,bedno_name
 ,b.age,b.sex,b.pttype,b.hn
 ,b.dateupdate_register,b.an,b.inbed_datetime
-,b.status_regis,a.img_room,bed_status
+,b.status_regis,a.img_room,bed_status,c.`name` AS namepttype 
 FROM vipbed_bedno AS a
 LEFT JOIN vipbed_register AS b ON b.bedno_in = a.bedno
+LEFT JOIN vipbed_pttype as c ON c.pttype = b.pttype 
  WHERE a.ward = '$ward'
  ORDER BY  a.bedno ASC ";
 $bedin_ward = mysqli_query($con, $sql);
@@ -22,10 +23,10 @@ $bedin_total = mysqli_query($con, $sql);
 $bed_total = mysqli_num_rows($bedin_total);
 $head_wardname  = mysqli_fetch_array($bedin_total);
 
-$sql = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y' ";
-$res = mysqli_query($con, $sql);
-$resdetail = mysqli_query($con, $sql);
-$resadd = mysqli_query($con, $sql);
+$sql_main = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y' ";
+$res = mysqli_query($con, $sql_main);
+$resdetail = mysqli_query($con, $sql_main);
+$resadd = mysqli_query($con, $sql_main);
 $row_cnt = mysqli_num_rows($res);
 
 while ($row     = mysqli_fetch_array($res)) {
@@ -206,14 +207,11 @@ while ($row     = mysqli_fetch_array($res)) {
                                 echo "<script>Swal.fire({icon: 'error', title: 'Invalid...', text: 'ผิดพลาดอัพโหลดไม่สำเร็จ', })</script>";
                             }
                       
-
                         } else {
                             echo "<script>Swal.fire({icon: 'error', title: 'ยังไม่ Admit', text: 'ยังไม่เป็นผู้ป่วยในของโรงพยาบาล', })</script>";
                         }
 
-
                     }
-
                     
                         if (isset($_POST['submit_dch'])) {
 
@@ -262,12 +260,13 @@ while ($row     = mysqli_fetch_array($res)) {
                             $lname      = $item['lname'];
                             $age        = $item['age'];
                             $sex        = $item['sex'];
+                            $an        = $item['an'];
                             $pttype     = $item['pttype'];
+                            $namepttype     = $item['namepttype'];
                             $status_regis = $item['status_regis'];
                             $bed_status = $item['bed_status'];
                             $img_room    = $item['img_room'];
                             $dateupdate_register = $item['dateupdate_register'];
-                           // $an                 = $item['an'];
                             $inbed_datetime        = $item['inbed_datetime'];
                         ?>
 
@@ -278,14 +277,10 @@ while ($row     = mysqli_fetch_array($res)) {
                                         <div class="row vertical-center-box vertical-center-box-tablet">
                                             <div class="col-xs-3 mar-bot-15 text-left">
                                                 <label class="label ">
-                                                    <span class="beddetf" beddetf-md-tooltip="รูปห้อง">
+                                                    <span class="beddetf zindex" beddetf-md-tooltip="รูปห้อง" data-toggle="modal" data-target="#img<?php echo $bedno; ?>">
                                                         <i class="fa fa-hospital-o" aria-hidden="true"></i>
-                                                        <?php //echo $value->total; 
-                                                        ?>
                                                     </span>
-                                                    <span class="bedfull" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
-                                                        <?php //echo $value->total; 
-                                                        ?>
+                                                    <span class="bedfull zindex" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
                                                         <i class="fa fa-cc-visa" aria-hidden="true"></i>
                                                     </span>
                                                 </label>
@@ -299,17 +294,24 @@ while ($row     = mysqli_fetch_array($res)) {
                                                     <div class="row vertical-center-box vertical-center-box-tablet">
                                                         <div class="col-xs-3 mar-bot-15 text-left">
                                                             <label class="label ">
-                                                                <span class="beddetf" beddetf-md-tooltip="รูปห้อง" data-toggle="modal" data-target="#img<?php echo $bedno; ?>">
+                                                            <div class="dettail-inbed">
+                                                        <?php echo $pname."".$fname."  ".$lname; ?>
+                                                        <br>
+                                                        <?php echo "HN : ".$hn ." AN : ". $an; ?>
+                                                        <br>
+                                                        <?php echo "สิทธิ : ".$namepttype; ?>
+                                                    </div>
+                                                 
+
+                                                                <!-- <span class="beddetf" beddetf-md-tooltip="รูปห้อง" data-toggle="modal" data-target="#img<?php echo $bedno; ?>">
                                                                     <i class="fa fa-hospital-o" aria-hidden="true"></i>
-                                                                    <?php //echo $value->total; 
-                                                                    ?>
+                                                                    <?php// echo $pname . "" . $fname . " " . $lname; ?>
                                                                 </span>
                                                                 <span class="bedfull" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
-                                                                    <?php //echo $value->total; 
-                                                                    ?>
                                                                     <i class="fa fa-cc-visa" aria-hidden="true"></i>
+                                                                    <?php// echo $pname . "" . $fname . " " . $lname; ?>
                                                                 </span>
-                                                            </label>
+                                                            </label> -->
                                                         </div>
 
                                                     <?php
@@ -325,14 +327,15 @@ while ($row     = mysqli_fetch_array($res)) {
                                                             } elseif ($sex == '2') {
                                                                 echo "<i class='fa fa-female' aria-hidden='true' title='หญิง'></i>";
                                                             } else {
-                                                                echo "<i class='fa fa-info-circle' aria-hidden='true' title='ว่าง'></i>";
+                                                               // echo "<i class='fa fa-info-circle' aria-hidden='true' title='ว่าง'></i>";
+                                                                echo "<i class='fa fa-plus' aria-hidden='true' title='ว่าง เพิ่มรายการจองเข้า'></i>";
                                                             }
                                                             ?>
                                                         </h2>
                                                     </div>
                                                     </div>
-                                                    <div style="color:red;"><b>
-                                                        <?php echo $pname . "" . $fname . " " . $lname; ?>&nbsp;
+                                                    <div style="color:#FFF;"><b>
+                                                        <?php //echo "HN : ".$hn . "  AN : " . $an; ?>&nbsp;
                                                         </b>
                                                     </div>
                                                     <div class="">
