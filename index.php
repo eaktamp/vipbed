@@ -147,7 +147,7 @@ $res = mysqli_query($con, $sql);
                                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
  
                                   <h4 class="text-left text-uppercase "><b><?php echo $nameward; ?></b></h4>
-                                    
+                                     
                                     <div class="row vertical-center-box vertical-center-box-tablet">
                                         <div class="col-xs-3 mar-bot-15 text-left">
                                             <label class="label ">

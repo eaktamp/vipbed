@@ -149,7 +149,15 @@ body {
   font-weight: normal;
   font-style: normal;
 }
-
+label .beddetf {
+  color: #fbffff;
+}
+label .bedfull {
+  color: #ff0a0a;
+}
+label .bednull {
+  color: #2aec34;
+}
 /*----------------------------------------*/
 /*  8. Menu collapse Area
 /*----------------------------------------*/
