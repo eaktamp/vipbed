@@ -221,7 +221,11 @@
                     </thead>
                     <tbody>
                         <?php
-                        $sql_dch = " SELECT * FROM vipbed_register WHERE bedno_in = '$bedno' AND status_regis = 'S'  ";
+                        $sql_dch = " SELECT vipbed_register.*,vipbed_pttype.name as pttypename
+                                     FROM vipbed_register 
+                                     INNER JOIN vipbed_pttype ON vipbed_pttype.pttype = vipbed_register.pttype
+                                     WHERE vipbed_register.bedno_in = '$bedno' 
+                                     AND vipbed_register.status_regis = 'S' ";
                         $resadd2 = mysqli_query($con, $sql_dch);
                         $rowadd  = mysqli_fetch_array($resadd2);
                        
@@ -236,7 +240,7 @@
                                     <td class="text-center"> <?php echo $rowadd['hn']; ?></td>
                                     <td class="text-left"> <?php echo $rowadd['pname'] . "" . $rowadd['fname'] . "  " . $rowadd['lname']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['age']; ?></td>
-                                    <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
+                                    <td class="text-center"> <?php echo $rowadd['pttypename']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['inbed_datetime']; ?></td>
                                     <td class="text-center"><button type="submit" id="submit_dch" name="submit_dch" class="btn btn-secondary btn-block btn-add" addbed-tooltip="จำหน่ายออกจากห้อง"><i class="fa fa-sign-out" aria-hidden="true"></i></button></td>
                                 </tr>

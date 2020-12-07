@@ -170,7 +170,6 @@ $res = mysqli_query($con, $sql);
                                     </div>
                                     <div class="progress progress-mini">
                                         <div style="width: <?php echo $regis_inbed * 100 / $total; ?>%" class="progress-bar bg-red"></div>
-                                        <!-- <div   style="width: <?php //echo 13 * 0 /100;?>%" class="progress-bar bg-red"></div> -->
                                     </div>
                                 </div>
                             </div>

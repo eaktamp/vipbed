@@ -22,7 +22,6 @@ $query = " SELECT pt.hn,pt.cid AS personal_id,pname,fname,lname,sex AS gender,
  LEFT JOIN thaiaddress ta ON ta.addressid = concat(pt.chwpart,pt.amppart,pt.tmbpart) WHERE hn= '$hn' ";
 $result = pg_query($conn, $query);
 if (pg_num_rows($result) > 0) {
-	// while ($row = pg_fetch_array($result)) {
 	$row     		= pg_fetch_array($result);
 	$hn      		= $row['hn'];
 	$pname   		= $row['pname'];
@@ -51,17 +50,41 @@ if (pg_num_rows($result) > 0) {
 		<input type="hidden" name="age" id="age" value="<?php echo $age; ?>">
 		<form>
 
-			<button type="submit" class="btn btn-block btn-select" id="submit_regis" value="" name="submit_regis" bedfull-md-tooltip="คลิกเพื่อจอง">
-				<?php echo $hn; ?>
-				<?php echo " " . $pname . "" . $fname . " " . $lname; ?>
-				<?php echo  " " . $row['gender_text']; ?>
-				<?php echo  " " . $row['ppname']; ?>
+			<table class="styled-table">
+				<tbody>
+					<tr class="active-row">
+						<td class="text-left"><?php echo " HN : ".$hn; ?></td>
+						<td class="text-left"><?php echo " ชื่อ-สกุล : " . $pname . "" . $fname . " " . $lname; ?></td>
+						<td class="text-left"><?php echo " อายุ (ปี) : " . $age; ?></td>
+						<td class="text-left"><?php echo " เพศ : " . $gender_text; ?></td>
+						<td class="text-left"><?php echo " สิทธิการักษา : ".$row['ppname']; ?></td>
+					</tr>
+					<!-- <tr class="active-row">
+						<td class="text-left"><?php// echo " สิทธิการักษา : ".$row['ppname']; ?></td>
+						<td class="text-left"><?php //echo " " . $pname . "" . $fname . " " . $lname; ?></td>
+						<td class="text-left"><?php //echo " " . $pname . "" . $fname . " " . $lname; ?></td>
+						<td class="text-left"><?php //echo " " . $pname . "" . $fname . " " . $lname; ?></td>
+					</tr> -->
+				</tbody>
+			</table>
+			<br>
+
+
+
+			<button type="submit" class="btn btn-select" id="submit_regis" value="" name="submit_regis" bedfull-md-tooltip="คลิกเพื่อจอง">
+					+ จอง +
+				<?php //echo $hn; 
+				?>
+				<?php //echo " ". $fname . " " . $lname; 
+				?>
+				<?php //echo  " " . $row['gender_text']; 
+				?>
+				<?php //echo  " " . $row['ppname']; 
+				?>
+				
 			</button>
 
 		<?php
-
-		//   }
-
 
 	} else {
 		echo "<p style='color:red'>ไม่พบข้อมูล...</p>";
@@ -73,9 +96,9 @@ if (pg_num_rows($result) > 0) {
 			//     alert("Test");
 			// }
 
-			 $(document).ready(function() {
-			 	$("#submit_regis").click(function(e) {
-					e.preventDefault();		
+			$(document).ready(function() {
+				$("#submit_regis").click(function(e) {
+					e.preventDefault();
 					$.ajax({
 						type: "POST",
 						url: "addpatient.php",
@@ -86,23 +109,22 @@ if (pg_num_rows($result) > 0) {
 
 								//alert(result.message);
 								Swal.fire({
-                                        icon: "success",
-                                        title: "สำเร็จ",
-                                        text: result.message,
-                                        type: "success"
-                                    }).then(function() {
-                                        location.reload();
-                                    });
-																	
+									icon: "success",
+									title: "สำเร็จ",
+									text: result.message,
+									type: "success"
+								}).then(function() {
+									location.reload();
+								});
 
 							} else {
 								//swal("ไม่สำเร็จ!", "มีข้อมูลผิดพลาดในระบบ!", "warning");
 								alert(result.message);
-							//	window.location.href = 'test.php';
+								//	window.location.href = 'test.php';
 							}
 						}
 					});
-			 	});
-			
-			 });
+				});
+
+			});
 		</script>
