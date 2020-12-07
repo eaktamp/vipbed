@@ -16,17 +16,13 @@ include("config/mysql_con.class.php");
 	$age 		 = $_POST['age'];
 	$userupdate_register = "User_Regis";
 	$status_regis = "Y";
-	
 
 $sql = " INSERT INTO vipbed_register (ward,pname,fname,lname,hn,sex,cid,pttype,birthday,age,userupdate_register,status_regis)
           values('$ward','$pname','$fname','$lname','$hn','$sex','$cid','$pttype','$birthday','$age','$userupdate_register','$status_regis') ";
 $query = mysqli_query($con,$sql);
 
- //echo json_encode(array('status' => '1','message'=> "$sql"));
-
 if($query) {
 	echo json_encode(array('status' => '1','message'=> 'รอยืนยันรับเข้าห้องพิเศษ'));
-	
 	
 }
 else

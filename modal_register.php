@@ -97,18 +97,35 @@
                             $id = $rowdetail['id'];
                             $rw++;
                         ?>
-
+                            <script language="JavaScript">
+                                function chkConfirm(id) {
+                                    if (confirm('คุณต้องการยกเลิกรายการจองนี้ ใช่หรือไม่ ?') == true) {
+                                            jQuery.ajax({
+                                                type: "POST",
+                                                url: "del_regis.php",
+                                                data: 'id=' + id,
+                                                cache: false,
+                                                success: function(response) {
+                                                    alert("ยกเลิกรายการจองสำเร็จ");
+                                                }
+                                            });
+                                    } else {
+                                        alert('ยังไม่ยกเลิกรายการนี้.');
+                                    }
+                                }
+                            </script>
+                  
                             <tr>
-                            <form id="delbed" name="delbed" action="#" method="post">
-                                <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
-                                <td class="text-center"><?php echo $rw; ?></td>
-                                <td class="text-center"> <?php echo $rowdetail['hn']; ?></td>
-                                <td class="text-left"> <?php echo $rowdetail['pname'] . "" . $rowdetail['fname'] . "  " . $rowdetail['lname']; ?></td>
-                                <td class="text-center"> <?php echo $rowdetail['age']; ?></td>
-                                <td class="text-left"> <?php echo $rowdetail['insname']; ?></td>
-                                <td class="text-center"> <?php echo $rowdetail['dateupdate_register']; ?></td>
-                                <td class="text-center"><button type="submit" id="submit_del" name="submit_del" onClick="return confirm('คุณต้องการยกเลิกการจอง ใช่ หรือ ไม่ ?');" class="btn btn-secondary btn-block btn-add" addbed-tooltip="ยกเลิกการจอง"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
-                            </form>
+                                <form id="delbed" name="delbed" action="#" method="POST">
+                                    <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
+                                    <td class="text-center"><?php echo $rw; ?></td>
+                                    <td class="text-center"> <?php echo $rowdetail['hn']; ?></td>
+                                    <td class="text-left"> <?php echo $rowdetail['pname'] . "" . $rowdetail['fname'] . "  " . $rowdetail['lname']; ?></td>
+                                    <td class="text-center"> <?php echo $rowdetail['age']; ?></td>
+                                    <td class="text-left"> <?php echo $rowdetail['insname']; ?></td>
+                                    <td class="text-center"> <?php echo $rowdetail['dateupdate_register']; ?></td>
+                                    <td class="text-center"><button OnClick="chkConfirm(<?php echo $id;?>)" type="submit" id="submit_del" name="submit_del" class=" btn btn-secondary btn-block btn-add" addbed-tooltip="ยกเลิกการจอง"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                                </form>
 
                             </tr>
                         <?php
@@ -178,7 +195,7 @@
                                     <td class="text-center"> <?php echo $rowadd['age']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['pttype']; ?></td>
                                     <td class="text-center"> <?php echo $rowadd['dateupdate_register']; ?></td>
-                                    <td class="text-center"><button type="submit" id="submitbed"  name="submitbed" onClick="return confirm('คุณต้องการ เข้าห้อง/เตียง นี้ ใช่หรือไม่ ?');" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' ' . $bedno; ?></button></td>
+                                    <td class="text-center"><button type="submit" id="submitbed" name="submitbed" onClick="return confirm('คุณต้องการ เข้าห้อง/เตียง นี้ ใช่หรือไม่ ?');" class="btn btn-secondary btn-block btn-add" addbed-tooltip="เพิ่มรายการนี้เข้าเตียง"><i class="fa fa-plus" aria-hidden="true"></i><?php echo ' ' . $bedno; ?></button></td>
                                 </tr>
                             </form>
                         <?php
@@ -236,7 +253,7 @@
 
                         ?>
 
-                        <form id="frm2" name="frm2" action="#" method="post">
+                        <form id="submitdch" name="submitdch" action="" method="post">
                             <input type="hidden" name="id" id="id" value="<?php echo $rowadd['id']; ?>">
                             <input type="hidden" name="ward" id="ward" value="<?php echo $ward; ?>">
                             <input type="hidden" name="bedno" id="bedno" value="<?php echo $bedno; ?>">
