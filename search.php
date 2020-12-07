@@ -67,7 +67,7 @@ if (pg_num_rows($result) > 0) {
 					</tr> -->
 				</tbody>
 			</table>
-			<br>
+			<!-- <br> -->
 
 
 

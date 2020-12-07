@@ -23,7 +23,11 @@ $bedin_total = mysqli_query($con, $sql);
 $bed_total = mysqli_num_rows($bedin_total);
 $head_wardname  = mysqli_fetch_array($bedin_total);
 
-$sql_main = " SELECT * FROM vipbed_register WHERE ward = '$ward' AND status_regis = 'Y' ";
+$sql_main = " SELECT aa.*,pp.name as insname 
+                FROM vipbed_register  as aa
+                LEFT JOIN vipbed_pttype as pp ON pp.pttype = aa.pttype 
+                WHERE aa.ward = '$ward' 
+                AND aa.status_regis = 'Y' ";
 $res = mysqli_query($con, $sql_main);
 $resdetail = mysqli_query($con, $sql_main);
 $resadd = mysqli_query($con, $sql_main);
@@ -32,9 +36,7 @@ $row_cnt = mysqli_num_rows($res);
 while ($row     = mysqli_fetch_array($res)) {
     $totalsex += COUNT($row['id']);
 }
-
 ?>
-
 <?php include "function/header.php"; ?>
 
 <body>
@@ -154,6 +156,8 @@ while ($row     = mysqli_fetch_array($res)) {
                 </div>
             </div>
         </div>
+
+
 
 
         <div class="section-admin container-fluid">
