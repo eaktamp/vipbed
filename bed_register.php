@@ -278,11 +278,12 @@ while ($row     = mysqli_fetch_array($res)) {
                                             <div class="col-xs-3 mar-bot-15 text-left">
                                                 <label class="label ">
                                                     <span class="beddetf zindex" beddetf-md-tooltip="รูปห้อง" data-toggle="modal" data-target="#img<?php echo $bedno; ?>">
-                                                        <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                                                    &nbsp;<i class="fa fa-hospital-o" aria-hidden="true"></i>&nbsp;
                                                     </span>
                                                     <span class="bedfull zindex" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
-                                                        <i class="fa fa-cc-visa" aria-hidden="true"></i>
+                                                    &nbsp;<i class="fa fa-cc-visa" aria-hidden="true"></i>&nbsp;
                                                     </span>
+                                                   
                                                 </label>
                                             </div>
                                         <?php
@@ -294,12 +295,12 @@ while ($row     = mysqli_fetch_array($res)) {
                                                     <div class="row vertical-center-box vertical-center-box-tablet">
                                                         <div class="col-xs-3 mar-bot-15 text-left">
                                                             <label class="label ">
-                                                            <div class="dettail-inbed">
+                                                        <div class="dettail-inbed">
                                                         <?php echo $pname."".$fname."  ".$lname; ?>
                                                         <br>
                                                         <?php echo "HN : ".$hn ." AN : ". $an; ?>
                                                         <br>
-                                                        <?php echo "สิทธิ : ".$namepttype; ?>
+                                                        <?php// echo "สิทธิ : ".$namepttype; ?>
                                                     </div>
                                                  
 
@@ -338,8 +339,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                                         <?php //echo "HN : ".$hn . "  AN : " . $an; ?>&nbsp;
                                                         </b>
                                                     </div>
-                                                    <div class="">
-                                                    </div>
+                                                 
                                                 </div>
                                             </div>
 
