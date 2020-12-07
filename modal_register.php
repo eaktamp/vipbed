@@ -7,7 +7,7 @@
             <div class="modal-header">
                 <h5 class="modal-title head-show-modal-bed" id="staticBackdropLabel"><?php echo  $nameward; ?></h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-body"style = "background-color: #016738;">
                 <form id="search_hn" action="" method="POST">
                     <!-- http://172.16.28.169:3000/api/patient/patientinfomation -->
                     <div class="row">
@@ -25,8 +25,10 @@
                         </div>
                     </div>
             </div>
-            <hr>
+            <br>
+            <!-- <hr> -->
             <div class="search-detail-p" id="result"></div>
+            
             <br>
         </div>
         </form>
@@ -56,10 +58,10 @@
             });
         </script>
 
-        <div class="modal-footer">
+        <!-- <div class="modal-footer"> -->
             <!-- <button type="button" class="btn btn-primary">Understood</button> -->
             <!-- <button type="button" class="btn btn-secondary btn-block btn-cloce" data-dismiss="modal">ปิด</button> -->
-        </div>
+        <!-- </div> -->
     </div>
 </div>
 
