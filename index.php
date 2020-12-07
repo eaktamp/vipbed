@@ -107,7 +107,7 @@ $res = mysqli_query($con, $sql);
                                             </div>
                                             <div class="breadcomb-ctn css-ward">
 
-                                                <h2 title="จำนวนโซนห้องพิเศษ">Vip Room Zone ( <span class="vrz"><?php echo $ward_total; ?></span> )</h2>
+                                                <h2 title="จำนวนโซนห้องพิเศษ" style= "margin: 0 0 0px;">Vip Room Zone ( <span class="vrz"><?php echo $ward_total; ?></span> )</h2>
                                                 <p bedtotal-tooltip="จำนวนเตียวพิเศษทั้งหมด">Bed Total ( <span class="bt"><?php echo $totalbed; ?></span> ) <span class="bread-ntd"></span></p>
                                             </div>
                                         </div>
