@@ -275,28 +275,28 @@ while ($row     = mysqli_fetch_array($res)) {
                         ?>
 
                             <?php if ($bed_status == "Y") { ?>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $bedno;  ?>">
-                                    <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
-                                        <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $ward_vip . ")</span>"; ?></b></h4>
-                                        <div class="row vertical-center-box vertical-center-box-tablet">
-                                            <div class="col-xs-3 mar-bot-15 text-left">
-                                                <label class="label ">
-                                                    <span class="beddetf zindex" beddetf-md-tooltip="รูปห้อง" data-toggle="modal" data-target="#img<?php echo $bedno; ?>">
-                                                    &nbsp;<i class="fa fa-hospital-o" aria-hidden="true"></i>&nbsp;
-                                                    </span>
-                                                    <span class="bedfull zindex" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
-                                                    &nbsp;<i class="fa fa-cc-visa" aria-hidden="true"></i>&nbsp;
-                                                    </span>
-                                                   
-                                                </label>
-                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bed<?php echo  $bedno;  ?>">
+                                                <div class="admin-content analysis-progrebar-ctn res-mg-t-15 room-free">
+                                                    <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $ward_vip . ")</span>"; ?></b></h4>
+                                                    <div class="row vertical-center-box vertical-center-box-tablet"style = "display: block;height: 60px;">
+                                                        <div class="col-xs-3 mar-bot-15 text-left">
+                                                            <label class="label ">
+                                                                <span class="beddetf zindex" beddetf-md-tooltip="รูปห้อง" data-toggle="modal" data-target="#img<?php echo $bedno; ?>">
+                                                                &nbsp;<i class="fa fa-hospital-o" aria-hidden="true"></i>&nbsp;
+                                                                </span>
+                                                                <span class="bedfull zindex" bedfull-md-tooltip="ค่าใช้จ่ายตามสิทธิ์">
+                                                                &nbsp;<i class="fa fa-cc-visa" aria-hidden="true"></i>&nbsp;
+                                                                </span>
+                                                            
+                                                            </label>
+                                                        </div>
                                         <?php
                                     } else {
                                         ?>
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hover-full-bed" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bedfull<?php echo  $bedno;  ?>">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 hover-main" style="margin-bottom: 10px;" data-toggle="modal" data-target="#bedfull<?php echo  $bedno;  ?>">
                                                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 ">
                                                     <h4 class="text-left text-uppercase "><b><?php echo  $bedno . " <span class='css-room'>(" . $ward_vip . ")</span>"; ?></b></h4>
-                                                    <div class="row vertical-center-box vertical-center-box-tablet">
+                                                    <div class="row vertical-center-box vertical-center-box-tablet" style = "display: block;height: 60px;">
                                                         <div class="col-xs-3 mar-bot-15 text-left">
                                                             <label class="label ">
                                                         <div class="dettail-inbed">
