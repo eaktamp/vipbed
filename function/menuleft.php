@@ -10,6 +10,7 @@
                     <li><a title="Lock" href="#"><span class="mini-sub-pro">ประเภทเตียง</span></a></li>
                     <li><a title="Lock" href="#"><span class="mini-sub-pro">สิทธิ์การรักษา</span></a></li>
                     <li><a title="Password Recovery" href="#"><span class="mini-sub-pro">ตั้งค่าพื้นฐาน</span></a></li>
+                    <li><a title="Password Recovery" href="service/"><span class="mini-sub-pro">Service</span></a></li>
                     <li><a title="Password Recovery" href="#"><span class="mini-sub-pro">ทีมพัฒนา</span></a></li>
                 </ul>
             </li>

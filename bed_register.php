@@ -200,8 +200,8 @@ while ($row     = mysqli_fetch_array($res)) {
                                 echo '<script>
                                         Swal.fire({
                                             icon: "success",
-                                            title: "สำเร็จ",
-                                            text: "แก้ไขข้อมูลสำเร็จ!",
+                                            title: "รับเข้าห้อง สำเร็จ",
+                                            text: "ห้อง  ' . $bedno_in." เวลา ".$inbed_datetime . '",
                                             type: "success"
                                         }).then(function() {
                                             window.location = "./bed_register.php?ward=' . $ward . '";
@@ -241,7 +241,7 @@ while ($row     = mysqli_fetch_array($res)) {
                                 echo '<script>
                                         Swal.fire({
                                             icon: "success",
-                                            title: "สำเร็จ",
+                                            title: "จำหน่ายสำเร็จ",
                                             text: "จำหน่ายออกจากห้องพิเศษแล้ว!",
                                             type: "success"
                                         }).then(function() {

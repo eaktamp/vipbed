@@ -110,7 +110,7 @@ if (pg_num_rows($result) > 0) {
 								//alert(result.message);
 								Swal.fire({
 									icon: "success",
-									title: "สำเร็จ",
+									title: "จองห้อง สำเร็จ",
 									text: result.message,
 									type: "success"
 								}).then(function() {
@@ -118,7 +118,6 @@ if (pg_num_rows($result) > 0) {
 								});
 
 							} else {
-								//swal("ไม่สำเร็จ!", "มีข้อมูลผิดพลาดในระบบ!", "warning");
 								alert(result.message);
 								//	window.location.href = 'test.php';
 							}
